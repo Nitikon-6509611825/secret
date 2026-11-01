@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Itim&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=letter-qr-1" />
+  <link rel="stylesheet" href="style.css?v=chat-supabase-6" />
 </head>
 <body>
   <div class="garden-background" aria-hidden="true">
@@ -559,6 +559,42 @@
     </section>
   </main>
 
+  <button class="chat-launcher" id="openChat" type="button" aria-haspopup="dialog" aria-controls="chatDialog">
+    💬 ข้อความ
+  </button>
+
+  <section class="chat-dialog" id="chatDialog" role="dialog" aria-modal="true" aria-labelledby="chatTitle" aria-hidden="true" hidden>
+    <div class="chat-panel">
+      <header class="chat-header">
+        <button class="chat-close" id="closeChat" type="button" aria-label="กลับหน้าหลัก">‹</button>
+        <div class="chat-profile">
+          <div class="chat-avatar" aria-hidden="true">💐</div>
+          <div class="chat-profile-copy">
+            <h2 id="chatTitle">กร</h2>
+            <p> 💗</p>
+          </div>
+        </div>
+        <span class="chat-header-heart" aria-hidden="true">♡</span>
+      </header>
+      <div class="chat-conversation">
+        <div class="chat-intro">
+          <div class="chat-avatar chat-avatar-large" aria-hidden="true">💐</div>
+          <strong>กร</strong>
+          <span>เค้าทำแชทไว้แอบส่งหา</span>
+          <span class="chat-status" id="chatStatus" role="status" aria-live="polite">กำลังเตรียมแชต...</span>
+        </div>
+        <ol class="chat-messages" id="chatMessages" aria-label="ข้อความในแชต" aria-live="polite"></ol>
+      </div>
+      <form class="chat-form" id="chatForm">
+        <div class="chat-composer">
+          <label class="visually-hidden" for="chatMessage">ข้อความ</label>
+          <textarea id="chatMessage" name="content" maxlength="500" rows="1" placeholder="ส่งข้อความ..." required></textarea>
+          <button class="chat-send" id="sendChat" type="submit" aria-label="ส่งข้อความ">➤</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
   <section class="bouquet-modal" id="bouquetModal" role="dialog" aria-modal="true" aria-labelledby="bouquetModalTitle" aria-hidden="true" hidden>
     <button class="bouquet-modal-close" id="closeBouquetModal" type="button" aria-label="ปิดช่อดอกไม้">×</button>
     <h2 id="bouquetModalTitle">ช่อดอกทานตะวันน 🌻</h2>
@@ -604,7 +640,7 @@
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <script src="script.js?v=kitty-flower-game-2"></script>
+  <script src="script.js?v=chat-supabase-6"></script>
 
 <!-- NEW FLORAL BORDER -->
 

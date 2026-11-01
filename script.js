@@ -38,6 +38,19 @@ const flowerGameField = document.getElementById("flowerGameField");
 const flowerGameScore = document.getElementById("flowerGameScore");
 const flowerGameMessage = document.getElementById("flowerGameMessage");
 const startFlowerGame = document.getElementById("startFlowerGame");
+const openChat = document.getElementById("openChat");
+const chatDialog = document.getElementById("chatDialog");
+const closeChat = document.getElementById("closeChat");
+const chatStatus = document.getElementById("chatStatus");
+const chatMessages = document.getElementById("chatMessages");
+const chatForm = document.getElementById("chatForm");
+const chatMessage = document.getElementById("chatMessage");
+const sendChat = document.getElementById("sendChat");
+
+const supabaseConfig = {
+  url: "https://agidwyplqqqqqcgxrcul.supabase.co",
+  anonKey: "sb_publishable_fvf7gPA1Pbuy2KtDeBfMgQ_ckKILzeg",
+};
 
 const relationshipStart = new Date(2026, 7, 18);
 
@@ -139,6 +152,164 @@ setInterval(createPetal, 420);
 for (let i = 0; i < 12; i++) {
   setTimeout(createPetal, i * 180);
 }
+
+const supabaseUrl = supabaseConfig.url.replace(/\/+$/, "");
+const chatApiReady = Boolean(supabaseUrl && supabaseConfig.anonKey);
+let chatRefreshTimer;
+
+function setChatStatus(message, isError = false) {
+  chatStatus.textContent = message;
+  chatStatus.classList.toggle("is-error", isError);
+}
+
+function formatChatTimestamp(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "เวลาไม่ถูกต้อง";
+
+  return date.toLocaleString("th-TH", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+}
+
+function renderChatMessages(messages) {
+  const items = messages.map((message) => {
+    const item = document.createElement("li");
+    const isOwner = message.sender_type === "owner";
+    item.className = `chat-message${isOwner ? " is-owner" : " is-user"}`;
+
+    const heading = document.createElement("div");
+    heading.className = "chat-message-heading";
+
+    const timestamp = document.createElement("time");
+    timestamp.dateTime = message.created_at;
+    timestamp.textContent = formatChatTimestamp(message.created_at);
+
+    const content = document.createElement("p");
+    content.textContent = message.content;
+
+    if (isOwner) {
+      const name = document.createElement("strong");
+      name.textContent = "กร";
+      heading.append(name);
+    }
+    heading.append(timestamp);
+    item.append(heading, content);
+    return item;
+  });
+
+  chatMessages.replaceChildren(...items);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function requestChat(path, options = {}) {
+  const response = await fetch(`${supabaseUrl}/rest/v1/${path}`, {
+    ...options,
+    headers: {
+      apikey: supabaseConfig.anonKey,
+      Authorization: `Bearer ${supabaseConfig.anonKey}`,
+      ...(options.headers || {}),
+    },
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+    throw new Error(details || `Supabase ตอบกลับด้วยสถานะ ${response.status}`);
+  }
+
+  const body = await response.text();
+  if (!body.trim()) return null;
+
+  try {
+    return JSON.parse(body);
+  } catch {
+    throw new Error("Supabase ส่งข้อมูลตอบกลับที่อ่านไม่ได้");
+  }
+}
+
+async function loadChatMessages() {
+  try {
+    const messages = await requestChat(
+      "chat_messages?select=id,display_name,sender_type,content,created_at&order=created_at.asc&limit=100",
+    );
+    renderChatMessages(messages);
+    setChatStatus(messages.length ? "ข้อความล่าสุด 💗" : "ยังไม่มีข้อความ มาเริ่มคุยกันได้นะ");
+  } catch (error) {
+    setChatStatus(`โหลดข้อความไม่สำเร็จ: ${error.message}`, true);
+  }
+}
+
+function openChatDialog() {
+  chatDialog.hidden = false;
+  chatDialog.setAttribute("aria-hidden", "false");
+  openChat.setAttribute("aria-expanded", "true");
+
+  if (!chatApiReady) {
+    setChatStatus("แชตยังไม่พร้อมใช้งาน กรุณาตั้งค่า Supabase ตามไฟล์ SUPABASE_SETUP.md", true);
+    sendChat.disabled = true;
+  } else {
+    loadChatMessages();
+    chatRefreshTimer = setInterval(loadChatMessages, 10000);
+  }
+
+  chatMessage.focus();
+}
+
+function closeChatDialog() {
+  chatDialog.hidden = true;
+  chatDialog.setAttribute("aria-hidden", "true");
+  openChat.setAttribute("aria-expanded", "false");
+  clearInterval(chatRefreshTimer);
+  openChat.focus();
+}
+
+openChat.setAttribute("aria-expanded", "false");
+openChat.addEventListener("click", openChatDialog);
+closeChat.addEventListener("click", closeChatDialog);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !chatDialog.hidden) {
+    event.stopImmediatePropagation();
+    closeChatDialog();
+  }
+});
+
+chatForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!chatApiReady) return;
+
+  const content = chatMessage.value.trim();
+  if (!content) {
+    setChatStatus("พิมพ์ข้อความก่อนส่งนะ", true);
+    chatMessage.focus();
+    return;
+  }
+
+  sendChat.disabled = true;
+  setChatStatus("กำลังส่งข้อความ...");
+
+  try {
+    await requestChat("chat_messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        display_name: "ผู้ใช้",
+        sender_type: "user",
+        content,
+      }),
+    });
+    chatForm.reset();
+    await loadChatMessages();
+    setChatStatus("ส่งข้อความแล้ว 💗");
+  } catch (error) {
+    setChatStatus(`ส่งข้อความไม่สำเร็จ: ${error.message}`, true);
+  } finally {
+    sendChat.disabled = false;
+  }
+});
 
 // Letter
 function openLetter() {
