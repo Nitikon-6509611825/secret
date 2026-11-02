@@ -14,7 +14,7 @@ const closeLetter = document.getElementById("closeLetter");
 const letterCard = document.getElementById("letterCard");
 const letterFront = document.querySelector(".letter-front");
 const letterBack = document.querySelector(".letter-back");
-const messageQr = document.getElementById("messageQr");
+const messageVideo = document.getElementById("messageVideo");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const photoCounter = document.getElementById("photoCounter");
@@ -497,7 +497,7 @@ function flipLetterCard() {
 }
 
 letterCard.addEventListener("click", flipLetterCard);
-messageQr.addEventListener("click", (event) => event.stopPropagation());
+messageVideo.addEventListener("click", (event) => event.stopPropagation());
 letterCard.addEventListener("keydown", (event) => {
   if (event.target === letterCard && (event.key === "Enter" || event.key === " ")) {
     event.preventDefault();

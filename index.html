@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Itim&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=chat-supabase-6" />
+  <link rel="stylesheet" href="style.css?v=blue-bear-1" />
 </head>
 <body>
   <div class="garden-background" aria-hidden="true">
@@ -99,6 +99,68 @@
       </g>
 
     </svg>
+    <div class="garden-bear" role="img" aria-label="ตุ๊กตาหมีสีฟ้าขยับทักทายอยู่ข้างคิดตี้">
+      <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="bearFur" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8bd0f5"/>
+            <stop offset=".58" stop-color="#58a7df"/>
+            <stop offset="1" stop-color="#397fc4"/>
+          </linearGradient>
+          <linearGradient id="bearMuzzle" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f8fdff"/>
+            <stop offset="1" stop-color="#d7efff"/>
+          </linearGradient>
+          <linearGradient id="bearBelly" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fffefa"/>
+            <stop offset="1" stop-color="#dceeff"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="120" cy="266" rx="70" ry="9" fill="#466f73" opacity=".18"/>
+        <g class="bear-float">
+          <g class="bear-arms" stroke="#367ebc" stroke-width="3">
+            <path d="M75 143C52 130 34 134 22 148C15 157 19 168 31 170L76 163Z" fill="url(#bearFur)"/>
+            <path d="M165 143C188 130 206 134 218 148C225 157 221 168 209 170L164 163Z" fill="url(#bearFur)"/>
+            <circle cx="27" cy="155" r="9" fill="#8bd0f5" stroke="none"/>
+            <circle cx="213" cy="155" r="9" fill="#8bd0f5" stroke="none"/>
+          </g>
+          <g class="bear-legs" fill="url(#bearFur)" stroke="#367ebc" stroke-width="3">
+            <ellipse cx="74" cy="235" rx="28" ry="25"/>
+            <ellipse cx="149" cy="235" rx="28" ry="25"/>
+            <ellipse cx="82" cy="240" rx="9" ry="6" fill="#b9e5ff" stroke="none"/>
+            <ellipse cx="140" cy="240" rx="9" ry="6" fill="#b9e5ff" stroke="none"/>
+          </g>
+          <path d="M72 150C73 128 91 119 120 119C149 119 167 128 168 150L165 214C163 231 148 239 120 239C92 239 77 231 75 214Z" fill="url(#bearFur)" stroke="#367ebc" stroke-width="3"/>
+          <ellipse cx="120" cy="188" rx="34" ry="39" fill="url(#bearBelly)" stroke="#d2eaff" stroke-width="2"/>
+          <g class="bear-belly-mark" fill="none" stroke="#78b8e4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M120 168L124 178L135 178L126 185L130 196L120 189L110 196L114 185L105 178L116 178Z" stroke-width="3"/>
+            <circle cx="120" cy="183" r="3" fill="#f3bd63" stroke="none"/>
+          </g>
+          <g class="bear-head">
+            <circle cx="72" cy="54" r="25" fill="url(#bearFur)" stroke="#367ebc" stroke-width="3"/>
+            <circle cx="168" cy="54" r="25" fill="url(#bearFur)" stroke="#367ebc" stroke-width="3"/>
+            <circle cx="72" cy="55" r="13" fill="#b8e5ff"/>
+            <circle cx="168" cy="55" r="13" fill="#b8e5ff"/>
+            <path d="M60 100C60 69 84 47 120 47C156 47 180 69 180 100C180 134 156 153 120 153C84 153 60 134 60 100Z" fill="url(#bearFur)" stroke="#367ebc" stroke-width="3"/>
+            <ellipse cx="94" cy="103" rx="10" ry="13" fill="#f5a8b9" opacity=".72"/>
+            <ellipse cx="146" cy="103" rx="10" ry="13" fill="#f5a8b9" opacity=".72"/>
+            <g class="bear-eyes" fill="#244a70">
+              <ellipse cx="97" cy="91" rx="5" ry="7"/>
+              <ellipse cx="143" cy="91" rx="5" ry="7"/>
+            </g>
+            <ellipse cx="120" cy="111" rx="21" ry="16" fill="url(#bearMuzzle)"/>
+            <ellipse cx="120" cy="105" rx="7" ry="5" fill="#28527a"/>
+            <path d="M120 110V116M120 116C116 121 112 120 110 117M120 116C124 121 128 120 130 117" fill="none" stroke="#28527a" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+        </g>
+        <g class="bear-sparkles" fill="#fff5c9" aria-hidden="true">
+          <path d="M37 99L41 108L50 112L41 116L37 125L33 116L24 112L33 108Z"/>
+          <path d="M201 82L204 89L211 92L204 95L201 102L198 95L191 92L198 89Z"/>
+          <circle cx="48" cy="194" r="3"/>
+          <circle cx="192" cy="207" r="3"/>
+        </g>
+      </svg>
+    </div>
     <div class="garden-hello-kitty" aria-hidden="true">
       <div class="hk-ears">
         <div class="hk-left-ear"></div>
@@ -508,16 +570,19 @@
             <p class="letter-label">A letter for you</p>
             <h2>To Due 💗</h2>
             <div class="message">
-              <p>วันนี้บี๋เป็นไงบ้างง ได้กินของอร่อยๆอะยัง หลับฝันดีหลับปุ๋ยทุกคืนอะปาวว</p>
-              <p>ไม่มีอาไร แค่มีดอกไม้มาให้</p>
-              <p>มีคิดตี้ด้วยยเหมือนมั้ยก็ม่ายรุ้55555ปั้นยากกมั่กกTT(นั่งปั้นทั้งงวัน เดะมาปั้นเพิ่มอีกหลายๆตัวเลยย)</p>
-              <p>มีดอกไม้มาเติมๆให้บี๋ด้วยยแหละแล้วเค้าก็เติมๆพลังให้บี๋ทู้กกวันด้วยแหละะบี๋อย่าลืมยิ้มเยอะๆนะยิ้มมมมม แบบ 😊 นิ </p>
-              <div class="message-qr" id="messageQr">
-                <img src="qrcode_420196710_245c6d020a5500458e2613424f27fb05.png" alt="QR code สำหรับสแกนจากจดหมาย">
-                <p>มีเพลงอยากส่งให้ฟังด้วยยชอบเพลงนี้มั่กก(จริงๆอยากร้องให้ฟังแต่ว่าไม่สบายเสียงขึ้นจมูกก5555555)</p>
+              <p>วันนี้ได้ร้องเพลงนี้ให้ฟังเเละ</p>
+              <p></p>
+              <p>แล้วก็มีแคร์แบ้ด้วยตอนนี้เป็นแคร์แบ้อยู่ยังไม่เป็นแคร์แบ5555555</p>
+              <p> </p>
+              <div class="message-video" id="messageVideo">
+                <video controls playsinline preload="metadata" aria-label="วิดีโอจากจดหมาย">
+                  <source src="video.mp4" type="video/mp4">
+                  เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
+                </video>
+                <p>(หายป่วยแยะแต่ก็ยังไม่มีเสียงเหมือนเดิม แหะะะ)</p>
               </div>
             </div>
-            <div class="signature">รักนะ 💐</div>
+            <div class="signature">รักนะ💗 </div>
             <p class="flip-hint">คลิกที่กระดาษเพื่อพลิกดูด้านหลัง</p>
           </div>
           <div class="letter-face letter-back" aria-hidden="true">
@@ -641,7 +706,7 @@
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <script src="script.js?v=chat-supabase-6"></script>
+  <script src="script.js?v=blue-bear-1"></script>
 
 <!-- NEW FLORAL BORDER -->
 

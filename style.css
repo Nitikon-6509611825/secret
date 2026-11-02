@@ -1060,7 +1060,7 @@ h1 {
   margin: 0 0 14px;
 }
 
-.message-qr {
+.message-video {
   display: grid;
   justify-items: center;
   gap: 8px;
@@ -1074,15 +1074,15 @@ h1 {
   box-shadow: 0 8px 22px rgba(139,76,96,.1);
 }
 
-.message-qr img {
+.message-video video {
   display: block;
-  width: clamp(150px, 42vw, 220px);
-  height: auto;
+  width: min(100%, 420px);
+  aspect-ratio: 16 / 9;
+  background: #1f1b1d;
   border-radius: 8px;
-  image-rendering: pixelated;
 }
 
-.message-qr p {
+.message-video p {
   margin: 0;
   color: #a64c70;
   font-size: .86em;
@@ -2650,6 +2650,64 @@ body.bouquet-revealing .bouquet-art::after {
   height: 100%;
 }
 
+.garden-bear {
+  position: absolute;
+  z-index: 1;
+  right: calc(8% + 272px);
+  bottom: 4%;
+  display: block;
+  width: 200px;
+  transform-origin: center bottom;
+  filter: drop-shadow(0 8px 8px rgba(39, 61, 91, .2));
+  pointer-events: none;
+  animation: bearFloat 2.4s ease-in-out infinite;
+}
+
+.garden-bear svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.bear-arms {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bearArmsSway 2.4s ease-in-out infinite;
+}
+
+.bear-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bearBlink 4.8s ease-in-out infinite;
+}
+
+.bear-sparkles {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bearSparkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes bearFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-7px) rotate(1deg); }
+}
+
+@keyframes bearArmsSway {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(-2deg); }
+}
+
+@keyframes bearBlink {
+  0%, 45%, 49%, 100% { transform: scaleY(1); }
+  47%, 48% { transform: scaleY(.12); }
+}
+
+@keyframes bearSparkle {
+  from { opacity: .48; }
+  to { opacity: 1; }
+}
+
 .flowers {
   display: none;
 }
@@ -2987,6 +3045,10 @@ body.intro-active .hk-thought-overlay {
 
 @media (prefers-reduced-motion: reduce) {
   .garden-hello-kitty,
+  .garden-bear,
+  .bear-arms,
+  .bear-eyes,
+  .bear-sparkles,
   .hk-left-leg,
   .hk-right-leg,
   .hk-bouquet {
@@ -2996,6 +3058,12 @@ body.intro-active .hk-thought-overlay {
 
 /* Keep Kitty visible and clear of the music controls on small screens */
 @media (max-width: 600px) {
+  .garden-bear {
+    right: 164px;
+    bottom: 66px;
+    width: 130px;
+  }
+
   .garden-hello-kitty {
     right: 18px;
     bottom: 66px;
@@ -3018,6 +3086,12 @@ body.intro-active .hk-thought-overlay {
 }
 
 @media (max-width: 600px) and (max-height: 700px) {
+  .garden-bear {
+    bottom: 48px;
+    width: 112px;
+    right: 144px;
+  }
+
   .delivery {
     top: 0;
   }
