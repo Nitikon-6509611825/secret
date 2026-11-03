@@ -599,7 +599,7 @@ body::before {
 }
 
 .intro::before {
-  content: "✦";
+  content: "\2726";
   top: 16%;
   right: 12%;
   font-size: 19px;
@@ -607,7 +607,7 @@ body::before {
 }
 
 .intro::after {
-  content: "♡";
+  content: "\2661";
   bottom: 23%;
   left: 10%;
   font-size: 24px;
@@ -2459,7 +2459,7 @@ body.bouquet-revealing::after {
   animation: bouquetBackdrop 3.6s ease forwards;
 }
 
-body.bouquet-revealing .intro > :not(.bouquet-art) {
+body.bouquet-revealing .intro > :not(.bouquet-art):not(.bouquet-switcher) {
   visibility: hidden;
 }
 
@@ -3513,11 +3513,39 @@ body.intro-active .hk-thought-overlay {
   color: #c13584;
 }
 
+.chat-load-older {
+  align-self: center;
+  flex: 0 0 auto;
+  margin: 0 0 2px;
+  padding: 7px 15px;
+  border: 1px solid rgba(185,77,118,.2);
+  border-radius: 999px;
+  background: #fff7fa;
+  color: #a64c70;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chat-load-older:hover {
+  background: #ffedf3;
+}
+
+.chat-load-older:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.chat-load-older:focus-visible {
+  outline: 2px solid #b94d76;
+  outline-offset: 2px;
+}
+
 .chat-messages {
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 14px;
   min-height: 0;
   overflow-y: auto;
@@ -3554,7 +3582,7 @@ body.intro-active .hk-thought-overlay {
   font-size: 11px;
 }
 
-.chat-message p {
+.chat-message-content {
   margin: 0;
   color: #262626;
   font-size: 16px;
@@ -3563,12 +3591,77 @@ body.intro-active .hk-thought-overlay {
   overflow-wrap: anywhere;
 }
 
+.chat-image-link {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 7px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(0,0,0,.06);
+}
+
+.chat-message-image {
+  display: block;
+  width: auto;
+  max-width: min(100%, 360px);
+  max-height: 340px;
+  object-fit: cover;
+}
+
 .chat-form {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   padding: 10px 18px max(14px, env(safe-area-inset-bottom));
   border-top: 1px solid #efefef;
   background: #fff;
+}
+
+.chat-image-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid #f1d8e2;
+  border-radius: 14px;
+  background: #fff8fb;
+}
+
+.chat-image-preview[hidden] {
+  display: none;
+}
+
+.chat-image-preview img {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  object-fit: cover;
+}
+
+.chat-image-preview span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: #765563;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-image-remove {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: #f7e8ee;
+  color: #9e4d6c;
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .chat-composer {
@@ -3607,6 +3700,29 @@ body.intro-active .hk-thought-overlay {
   line-height: 20px;
 }
 
+.chat-attach {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 34px;
+  height: 38px;
+  border-radius: 50%;
+  color: #b94d76;
+  font-family: Arial, sans-serif;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.chat-attach:hover {
+  background: #fff0f5;
+}
+
+.chat-image-input:focus-visible + .chat-attach {
+  outline: 2px solid #b94d76;
+  outline-offset: 2px;
+}
+
 .chat-send {
   display: grid;
   flex: 0 0 auto;
@@ -3635,7 +3751,7 @@ body.intro-active .hk-thought-overlay {
 
 .chat-message.is-user .chat-message-heading,
 .chat-message.is-user .chat-message time,
-.chat-message.is-user p {
+.chat-message.is-user .chat-message-content {
   color: #fff;
 }
 
@@ -3689,5 +3805,658 @@ body.intro-active .hk-thought-overlay {
 
   .chat-messages {
     gap: 12px;
+  }
+}
+
+/* Christmas winter scene */
+:root {
+  --pink: #c83d54;
+  --deep-pink: #9f263d;
+  --soft-pink: #e8f3f8;
+  --paper: #fbfdff;
+  --text: #294858;
+}
+
+body {
+  color: var(--text);
+  background:
+    radial-gradient(circle at 18% 16%, rgba(224,241,249,.42), transparent 25%),
+    radial-gradient(circle at 82% 25%, rgba(188,220,239,.24), transparent 32%),
+    linear-gradient(145deg, #597b92 0%, #88a8ba 48%, #688ba2 100%);
+}
+
+body::before {
+  background: radial-gradient(circle at center, transparent 40%, rgba(42,91,117,.12));
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255,255,255,.9) 50%, transparent 100%),
+    radial-gradient(1px 1px at 27% 9%, rgba(255,255,255,.8) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 43% 24%, rgba(255,255,255,.8) 50%, transparent 100%),
+    radial-gradient(1px 1px at 61% 12%, rgba(255,255,255,.9) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 78% 20%, rgba(255,255,255,.8) 50%, transparent 100%),
+    radial-gradient(1px 1px at 91% 8%, rgba(255,255,255,.9) 50%, transparent 100%),
+    radial-gradient(ellipse 43% 22% at 22% 4%, rgba(92,230,193,.2), transparent 100%),
+    radial-gradient(ellipse 52% 25% at 71% 8%, rgba(154,174,255,.17), transparent 100%);
+  mix-blend-mode: screen;
+  mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.72) 27%, transparent 66%);
+  animation: auroraBreathe 12s ease-in-out infinite alternate;
+}
+
+.garden-background {
+  opacity: 1;
+}
+
+.christmas-lights {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  filter: drop-shadow(0 3px 4px rgba(20, 45, 59, .25));
+}
+
+.christmas-lights::before {
+  position: absolute;
+  top: -25px;
+  left: -2%;
+  width: 104%;
+  height: 57px;
+  border-bottom: 1px solid rgba(28, 57, 68, .75);
+  border-radius: 0 0 50% 50%;
+  content: "";
+}
+
+.christmas-lights span {
+  position: absolute;
+  top: var(--bulb-drop, 24px);
+  left: var(--bulb-position);
+  width: 10px;
+  height: 15px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 45% 45% 50% 50%;
+  background: var(--bulb-color, #ffe27a);
+  box-shadow: 0 0 11px 3px var(--bulb-glow, rgba(255,226,122,.45));
+  transform: translateX(-50%);
+  animation: bulbGlow 2.8s ease-in-out var(--bulb-delay, 0s) infinite alternate;
+}
+
+.christmas-lights span:nth-child(1) { --bulb-position: 4%; --bulb-drop: 29px; --bulb-delay: -.3s; }
+.christmas-lights span:nth-child(2) { --bulb-position: 12%; --bulb-drop: 37px; --bulb-color: #ff9a9e; --bulb-glow: rgba(255,154,158,.42); }
+.christmas-lights span:nth-child(3) { --bulb-position: 21%; --bulb-drop: 43px; --bulb-delay: -1s; }
+.christmas-lights span:nth-child(4) { --bulb-position: 30%; --bulb-drop: 47px; --bulb-color: #9de2c0; --bulb-glow: rgba(157,226,192,.4); }
+.christmas-lights span:nth-child(5) { --bulb-position: 39%; --bulb-drop: 49px; --bulb-delay: -1.6s; }
+.christmas-lights span:nth-child(6) { --bulb-position: 48%; --bulb-drop: 50px; --bulb-color: #ff9a9e; --bulb-glow: rgba(255,154,158,.42); }
+.christmas-lights span:nth-child(7) { --bulb-position: 57%; --bulb-drop: 49px; --bulb-delay: -.8s; }
+.christmas-lights span:nth-child(8) { --bulb-position: 66%; --bulb-drop: 46px; --bulb-color: #9de2c0; --bulb-glow: rgba(157,226,192,.4); }
+.christmas-lights span:nth-child(9) { --bulb-position: 75%; --bulb-drop: 42px; --bulb-delay: -1.9s; }
+.christmas-lights span:nth-child(10) { --bulb-position: 84%; --bulb-drop: 36px; --bulb-color: #ff9a9e; --bulb-glow: rgba(255,154,158,.42); }
+.christmas-lights span:nth-child(11) { --bulb-position: 92%; --bulb-drop: 30px; --bulb-delay: -.6s; }
+.christmas-lights span:nth-child(12) { --bulb-position: 98%; --bulb-drop: 27px; --bulb-color: #9de2c0; --bulb-glow: rgba(157,226,192,.4); }
+
+.christmas-cabin {
+  position: absolute;
+  z-index: 1;
+  top: 17%;
+  right: 3%;
+  width: clamp(190px, 24vw, 300px);
+  filter: drop-shadow(0 10px 12px rgba(34, 72, 81, .2));
+}
+
+.christmas-cabin svg,
+.christmas-snowman svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.christmas-tree {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 2%;
+  width: clamp(240px, 29vw, 360px);
+  height: clamp(340px, 46vw, 460px);
+  filter: drop-shadow(0 12px 14px rgba(34, 72, 81, .24));
+}
+
+.christmas-tree svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.tree-lights circle:nth-child(4n + 1) {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: treeLightTwinkle 2.1s ease-in-out infinite alternate;
+}
+
+.tree-lights circle:nth-child(4n + 3) {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: treeLightTwinkle 1.8s ease-in-out -.8s infinite alternate;
+}
+
+.tree-topper {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: treeTopperGlow 2.8s ease-in-out infinite alternate;
+}
+
+.christmas-snowman {
+  position: absolute;
+  z-index: 3;
+  bottom: 1%;
+  left: 24%;
+  width: clamp(92px, 11vw, 142px);
+  filter: drop-shadow(0 12px 12px rgba(34, 72, 81, .24));
+  transform-origin: center bottom;
+  animation: snowmanSway 4.5s ease-in-out infinite;
+}
+
+.petal-layer {
+  z-index: 3;
+}
+
+.snowflake {
+  position: absolute;
+  top: -50px;
+  display: block;
+  color: #fff;
+  line-height: 1;
+  -webkit-text-stroke: .35px #8eaaba;
+  text-shadow: 0 1px 2px #41677d, 0 0 8px rgba(32, 79, 106, .8);
+  animation: fall linear forwards;
+  opacity: 1;
+  transform-origin: center;
+  user-select: none;
+}
+
+.delivery,
+.intro {
+  border-color: rgba(255,255,255,.9);
+  background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(241,249,253,.76));
+  box-shadow:
+    0 28px 90px rgba(29, 66, 87, .28),
+    0 0 0 5px rgba(222, 241, 249, .18),
+    inset 0 1px rgba(255,255,255,.98),
+    inset 0 0 34px rgba(255,255,255,.24);
+  outline: 1px solid rgba(255,255,255,.36);
+  outline-offset: 4px;
+}
+
+.intro {
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(255,255,255,.76), transparent 46%),
+    linear-gradient(145deg, rgba(255,255,255,.9), rgba(232,244,250,.79));
+}
+
+.intro .tiny::before,
+.intro .tiny::after {
+  color: #c69b57;
+  content: "\2727";
+  font-size: .9em;
+}
+
+.intro .tiny::before {
+  margin-right: 10px;
+}
+
+.intro .tiny::after {
+  margin-left: 10px;
+}
+
+.bouquet-switcher::before {
+  position: absolute;
+  z-index: 0;
+  top: 6%;
+  left: 50%;
+  width: min(250px, 78vw);
+  height: 200px;
+  border: 1px solid rgba(255,255,255,.62);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 50% 58%, rgba(255,255,255,.64), rgba(215,237,247,.28) 54%, transparent 72%);
+  box-shadow: 0 0 40px rgba(255,255,255,.2), inset 0 0 22px rgba(255,255,255,.36);
+  content: "";
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.bouquet-switcher .bouquet-art {
+  position: relative;
+  z-index: 1;
+}
+
+.bouquet-switch-status {
+  padding: 2px 12px;
+  border: 1px solid rgba(255,255,255,.62);
+  border-radius: 999px;
+  background: rgba(255,255,255,.42);
+  color: #426777;
+}
+
+.tiny {
+  color: #57798a;
+}
+
+h1,
+.delivery h1 {
+  color: #a52c43;
+  text-shadow: 0 5px 20px rgba(165, 44, 67, .16);
+}
+
+.delivery-message,
+.hint {
+  color: #426777;
+}
+
+.accept-button {
+  background: linear-gradient(145deg, #d94e5d, #ae293f);
+}
+
+.decline-button {
+  border-color: rgba(68, 112, 132, .2);
+  background: rgba(255,255,255,.8);
+  color: #426777;
+}
+
+@keyframes auroraBreathe {
+  from { opacity: .56; }
+  to { opacity: 1; }
+}
+
+@keyframes bulbGlow {
+  from { filter: brightness(.82); }
+  to { filter: brightness(1.22); }
+}
+
+@keyframes treeLightTwinkle {
+  from { opacity: .72; }
+  to { opacity: 1; }
+}
+
+@keyframes treeTopperGlow {
+  from { filter: brightness(.94); }
+  to { filter: brightness(1.16); }
+}
+
+@keyframes snowmanSway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg) translateY(-2px); }
+}
+
+@media (max-width: 600px) {
+  .christmas-tree {
+    left: -3%;
+    width: clamp(180px, 44vw, 250px);
+    height: clamp(255px, 66vw, 330px);
+  }
+
+  .christmas-cabin {
+    top: auto;
+    bottom: 29%;
+    right: 0;
+    width: clamp(125px, 35vw, 175px);
+  }
+
+  .christmas-snowman {
+    left: 23%;
+    bottom: 68px;
+    width: clamp(76px, 23vw, 110px);
+  }
+
+  .christmas-lights span {
+    width: 8px;
+    height: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snowflake,
+  .tree-lights circle,
+  .tree-topper,
+  .christmas-lights span,
+  body::after {
+    animation: none;
+  }
+
+  .christmas-snowman {
+    animation-duration: 4.5s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+.bouquet-modal {
+  justify-content: flex-start;
+  gap: 16px;
+  overflow: hidden;
+  padding: max(72px, env(safe-area-inset-top)) 20px 24px;
+}
+
+.bouquet-collection-heading {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.bouquet-collection-heading p {
+  margin: 0 0 4px;
+  color: #b77889;
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+
+.bouquet-collection-heading h2 {
+  margin: 0;
+}
+
+.bouquet-collection-heading span {
+  display: block;
+  margin-top: 4px;
+  color: #805c62;
+  font-size: 17px;
+}
+
+.bouquet-collection,
+.bouquet-detail {
+  width: min(920px, 100%);
+  min-height: 0;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #c97b94 rgba(255,255,255,.55);
+  scrollbar-width: thin;
+}
+
+.bouquet-collection {
+  display: grid;
+  flex: 0 1 56vh;
+  height: 56vh;
+  max-height: 560px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(270px, auto);
+  align-content: start;
+  gap: 16px;
+  padding: 4px 6px 12px;
+}
+
+.bouquet-collection[hidden],
+.bouquet-detail[hidden] {
+  display: none;
+}
+
+.bouquet-collection-card {
+  display: grid;
+  grid-template-rows: minmax(135px, 1fr) auto auto;
+  gap: 4px;
+  min-width: 0;
+  min-height: 220px;
+  padding: 12px 14px 14px;
+  border: 1px solid rgba(185, 112, 137, .2);
+  border-radius: 22px;
+  background: linear-gradient(150deg, rgba(255,255,255,.96), rgba(255,247,247,.88));
+  box-shadow: 0 8px 22px rgba(109, 67, 76, .1), inset 0 1px rgba(255,255,255,.95);
+  color: #704b55;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.bouquet-collection-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(185, 77, 118, .45);
+  box-shadow: 0 14px 28px rgba(109, 67, 76, .16), inset 0 1px rgba(255,255,255,.95);
+}
+
+.bouquet-collection-card:focus-visible,
+.bouquet-detail-back:focus-visible {
+  outline: 3px solid #b94d76;
+  outline-offset: 3px;
+}
+
+.bouquet-collection-art {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+
+.bouquet-collection-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 190px;
+  overflow: visible;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 8px rgba(111,75,47,.13));
+}
+
+.bouquet-collection-name {
+  color: #9c4c68;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bouquet-collection-caption {
+  color: #947a75;
+  font-size: 15px;
+}
+
+.bouquet-detail {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px 16px;
+  text-align: center;
+}
+
+.bouquet-detail-back {
+  align-self: flex-start;
+  padding: 8px 14px;
+  border: 1px solid rgba(166,76,112,.2);
+  border-radius: 999px;
+  background: rgba(255,255,255,.8);
+  color: #a64c70;
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.bouquet-detail h3 {
+  margin: 0;
+  color: #a64c70;
+  font-size: clamp(23px, 5vw, 32px);
+}
+
+.bouquet-detail .bouquet-modal-artwork {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 56vh;
+}
+
+.bouquet-detail .bouquet-modal-artwork svg {
+  width: auto;
+  max-width: min(82vw, 490px);
+  height: auto;
+  max-height: 54vh;
+}
+
+.bouquet-detail p {
+  max-width: 560px;
+}
+
+@media (max-width: 600px) {
+  .bouquet-modal {
+    gap: 12px;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .bouquet-collection-heading h2 {
+    max-width: 310px;
+    font-size: 25px;
+  }
+
+  .bouquet-collection-heading span {
+    font-size: 15px;
+  }
+
+  .bouquet-collection {
+    flex-basis: 54vh;
+    height: 54vh;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: 220px;
+    gap: 10px;
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+
+  .bouquet-collection-card {
+    grid-template-rows: minmax(112px, 1fr) auto auto;
+    min-height: 185px;
+    padding: 8px 7px 10px;
+    border-radius: 17px;
+  }
+
+  .bouquet-collection-art svg {
+    max-height: 150px;
+  }
+
+  .bouquet-collection-name {
+    font-size: 16px;
+  }
+
+  .bouquet-collection-caption {
+    font-size: 13px;
+  }
+
+  .bouquet-detail .bouquet-modal-artwork {
+    max-height: 52vh;
+  }
+
+  .bouquet-detail .bouquet-modal-artwork svg {
+    max-width: 86vw;
+    max-height: 50vh;
+  }
+}
+
+.bouquet-art > .bouquet-rose-art,
+.bouquet-art > .sunflower-bouquet {
+  display: none;
+}
+
+.bouquet-switcher {
+  position: relative;
+  width: min(360px, 100%);
+  margin: -8px auto -14px;
+  padding-bottom: 20px;
+}
+
+.bouquet-switcher .bouquet-art {
+  margin: 0 auto;
+  cursor: zoom-in;
+}
+
+.bouquet-artwork-stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: clamp(180px, 25vw, 260px);
+}
+
+.bouquet-artwork-stage svg {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  overflow: visible;
+}
+
+.bouquet-switch-button {
+  position: absolute;
+  z-index: 2;
+  top: 42%;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0 0 4px;
+  border: 1px solid rgba(185,77,118,.2);
+  border-radius: 50%;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 5px 16px rgba(111,75,47,.16);
+  color: #a64c70;
+  font: inherit;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.bouquet-switch-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(111,75,47,.2);
+}
+
+.bouquet-switch-button:focus-visible {
+  outline: 3px solid #b94d76;
+  outline-offset: 3px;
+}
+
+.bouquet-switch-previous {
+  left: 0;
+}
+
+.bouquet-switch-next {
+  right: 0;
+}
+
+.bouquet-switch-status {
+  position: absolute;
+  right: 48px;
+  bottom: 0;
+  left: 48px;
+  margin: 0;
+  overflow: hidden;
+  color: #805c62;
+  font-size: 15px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.bouquet-revealing .bouquet-switch-button,
+body.bouquet-revealing .bouquet-switch-status {
+  visibility: hidden;
+}
+
+@media (max-width: 600px) {
+  .bouquet-switcher {
+    width: 100%;
+    margin-top: -6px;
+    margin-bottom: -12px;
+  }
+
+  .bouquet-artwork-stage {
+    height: clamp(180px, 55vw, 230px);
+  }
+
+  .bouquet-switch-button {
+    width: 36px;
+    height: 36px;
+    font-size: 30px;
   }
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#ffd6e7" />
+  <meta name="theme-color" content="#688ba2" />
 
   <title>For you only</title>
   <meta name="description" content="A little page to explore." />
@@ -19,24 +19,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Itim&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=blue-bear-1" />
+  <link rel="stylesheet" href="style.css?v=chat-history-1" />
 </head>
 <body>
   <div class="garden-background" aria-hidden="true">
     <svg viewBox="0 0 1000 800" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="gardenSky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#f8f2e8"/>
-          <stop offset=".62" stop-color="#eaf3df"/>
-          <stop offset="1" stop-color="#c8dfb1"/>
+          <stop offset="0" stop-color="#64849a"/>
+          <stop offset=".62" stop-color="#8faebf"/>
+          <stop offset="1" stop-color="#c6dce8"/>
         </linearGradient>
+        <radialGradient id="moonHalo">
+          <stop offset="0" stop-color="#fff5c9" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#fff5c9" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="auroraRibbon" x1="0" y1="0" x2="1" y2=".2">
+          <stop offset="0" stop-color="#87f0cb" stop-opacity="0"/>
+          <stop offset=".3" stop-color="#83e9c2" stop-opacity=".58"/>
+          <stop offset=".62" stop-color="#b9ddf7" stop-opacity=".48"/>
+          <stop offset=".82" stop-color="#d5c7f5" stop-opacity=".42"/>
+          <stop offset="1" stop-color="#87f0cb" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="auroraSoftEdge" x="-10%" y="-30%" width="120%" height="160%">
+          <feGaussianBlur stdDeviation="10"/>
+        </filter>
         <linearGradient id="gardenHill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#c7dfa9"/>
-          <stop offset="1" stop-color="#91bd82"/>
+          <stop offset="0" stop-color="#e4f0f5"/>
+          <stop offset="1" stop-color="#bfd4de"/>
         </linearGradient>
         <linearGradient id="gardenPath" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#f6e8ca"/>
-          <stop offset="1" stop-color="#e8d5b2"/>
+          <stop offset="0" stop-color="#f3f8fa"/>
+          <stop offset="1" stop-color="#d8e6ec"/>
         </linearGradient>
         <g id="gardenDaisy">
           <g fill="#fffdf1">
@@ -68,18 +82,41 @@
         </g>
       </defs>
       <path fill="url(#gardenSky)" d="M0 0H1000V800H0Z"/>
-      <circle cx="835" cy="130" r="52" fill="#fff1ba" opacity=".82"/>
+      <path d="M-40 179C112 92 219 67 358 98S610 167 781 111S955 70 1040 94C872 136 770 197 608 157S332 82 187 143S31 204-40 211Z" fill="url(#auroraRibbon)" filter="url(#auroraSoftEdge)" opacity=".72"/>
+      <path d="M-30 139C118 75 250 61 392 91S665 143 817 91S968 64 1030 81C851 113 709 165 493 121S187 91-30 161Z" fill="url(#auroraRibbon)" filter="url(#auroraSoftEdge)" opacity=".5"/>
+      <circle cx="835" cy="130" r="112" fill="url(#moonHalo)"/>
+      <circle cx="835" cy="130" r="43" fill="#fff3c5" opacity=".9"/>
+      <circle cx="821" cy="117" r="8" fill="#e7d79e" opacity=".38"/>
+      <circle cx="849" cy="143" r="5" fill="#e7d79e" opacity=".32"/>
+      <circle cx="847" cy="113" r="3" fill="#e7d79e" opacity=".4"/>
+      <g fill="#f7fcff">
+        <circle cx="91" cy="82" r="2"/><circle cx="164" cy="235" r="1.7"/>
+        <circle cx="294" cy="91" r="1.5"/><circle cx="388" cy="184" r="2"/>
+        <circle cx="493" cy="67" r="1.8"/><circle cx="586" cy="126" r="1.4"/>
+        <circle cx="706" cy="70" r="2"/><circle cx="925" cy="207" r="1.8"/>
+        <circle cx="943" cy="87" r="1.3"/><circle cx="752" cy="243" r="1.4"/>
+      </g>
+      <g fill="none" stroke="#f7fcff" stroke-width="1.5" opacity=".8">
+        <path d="M250 115V127M244 121H256"/><path d="M555 76V88M549 82H561"/>
+        <path d="M920 153V165M914 159H926"/><path d="M72 196V206M67 201H77"/>
+      </g>
       <g fill="#fff" opacity=".54">
         <ellipse cx="176" cy="157" rx="56" ry="17"/><ellipse cx="210" cy="146" rx="33" ry="22"/><ellipse cx="244" cy="158" rx="45" ry="15"/>
         <ellipse cx="657" cy="201" rx="49" ry="14"/><ellipse cx="684" cy="191" rx="29" ry="20"/><ellipse cx="716" cy="202" rx="40" ry="13"/>
       </g>
-      <path d="M0 421Q172 310 344 414T690 398T1000 390V800H0Z" fill="#d9e8c1"/>
+      <g fill="#42697a" opacity=".28">
+        <path d="M58 453L83 397L108 453Z"/><path d="M83 438L112 372L141 438Z"/>
+        <path d="M267 440L296 376L325 440Z"/><path d="M317 450L341 397L365 450Z"/>
+        <path d="M663 431L689 374L715 431Z"/><path d="M712 442L741 378L770 442Z"/>
+        <path d="M871 435L895 382L919 435Z"/><path d="M916 442L946 375L976 442Z"/>
+      </g>
+      <path d="M0 421Q172 310 344 414T690 398T1000 390V800H0Z" fill="#b9d0dc"/>
       <path d="M0 502Q176 372 369 479T717 455T1000 462V800H0Z" fill="url(#gardenHill)"/>
-      <path d="M0 613Q230 545 430 602T1000 560V800H0Z" fill="#9fc58c"/>
+      <path d="M0 613Q230 545 430 602T1000 560V800H0Z" fill="#a9c3cf"/>
       <path d="M365 800Q430 676 470 582Q500 524 560 559Q621 593 627 800Z" fill="url(#gardenPath)" opacity=".92"/>
       <path d="M444 800Q467 687 489 605M559 800Q541 682 531 603" fill="none" stroke="#fff7df" stroke-width="4" opacity=".58"/>
 
-      <g opacity=".95">
+      <g opacity=".95" display="none">
         <use href="#gardenSunflower" transform="translate(63 509) scale(.8)"/>
         <use href="#gardenTulip" transform="translate(119 556) scale(1.05)"/>
         <use href="#gardenDaisy" transform="translate(171 575) scale(1.2)"/>
@@ -99,6 +136,259 @@
       </g>
 
     </svg>
+    <div class="christmas-lights" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="christmas-cabin" role="img" aria-label="บ้านไม้หลังเล็กที่ตกแต่งรับคริสต์มาส">
+      <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="cabinWall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#b97552"/>
+            <stop offset="1" stop-color="#814a3a"/>
+          </linearGradient>
+          <linearGradient id="cabinRoof" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#496a79"/>
+            <stop offset="1" stop-color="#294755"/>
+          </linearGradient>
+          <radialGradient id="cabinWindowGlow">
+            <stop offset="0" stop-color="#fff5a8"/>
+            <stop offset="1" stop-color="#f6ad4f"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="151" cy="205" rx="137" ry="12" fill="#7898a4" opacity=".22"/>
+        <path d="M37 99L148 22L264 99V193H37Z" fill="url(#cabinWall)" stroke="#684437" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M19 97L145 13L281 97L265 108L146 36L35 109Z" fill="url(#cabinRoof)" stroke="#294755" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M13 94Q63 91 99 72Q132 55 146 23Q162 56 195 73Q230 91 286 94L278 107Q223 105 190 90Q158 76 145 52Q128 77 96 91Q61 106 19 107Z" fill="#faffff" stroke="#d7edf5" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M35 88Q77 84 108 63Q132 47 146 25Q162 48 190 66Q222 84 270 88" fill="none" stroke="#f5d477" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 9"/>
+        <g fill="#ffd46a" stroke="#fff1b8" stroke-width="1">
+          <circle cx="60" cy="84" r="3.5"/><circle cx="88" cy="75" r="3.5"/>
+          <circle cx="116" cy="57" r="3.5"/><circle cx="145" cy="31" r="4"/>
+          <circle cx="173" cy="57" r="3.5"/><circle cx="204" cy="76" r="3.5"/>
+          <circle cx="239" cy="85" r="3.5"/>
+        </g>
+        <path d="M218 58V23H241V75Z" fill="#704635" stroke="#54382f" stroke-width="3"/>
+        <path d="M212 25Q229 19 246 25L241 33H217Z" fill="#faffff"/>
+        <path d="M70 118H116V164H70Z" fill="url(#cabinWindowGlow)" stroke="#f8e6bb" stroke-width="5"/>
+        <path d="M92 120V163M72 141H114" stroke="#f5ead7" stroke-width="5"/>
+        <path d="M178 119H224V165H178Z" fill="url(#cabinWindowGlow)" stroke="#f8e6bb" stroke-width="5"/>
+        <path d="M201 121V164M180 142H222" stroke="#f5ead7" stroke-width="5"/>
+        <path d="M132 193V143Q132 130 147 130Q162 130 162 143V193Z" fill="#654338" stroke="#f1d8b8" stroke-width="4"/>
+        <circle cx="155" cy="164" r="3" fill="#ffd46a"/>
+        <circle cx="198" cy="111" r="13" fill="#3c7855" stroke="#d8bb73" stroke-width="3"/>
+        <path d="M191 111Q198 103 205 111Q198 119 191 111Z" fill="#c9474b"/>
+        <path d="M42 195Q150 185 260 195" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="christmas-tree" role="img" aria-label="ต้นคริสต์มาสสูงใหญ่ประดับหิมะ ไฟหลากสี ลูกบอล และดาวทอง">
+      <svg viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="firLower" x1="0" y1="0" x2="1" y2=".25">
+            <stop offset="0" stop-color="#073b31"/>
+            <stop offset=".46" stop-color="#12654a"/>
+            <stop offset=".72" stop-color="#0d503d"/>
+            <stop offset="1" stop-color="#06382f"/>
+          </linearGradient>
+          <linearGradient id="firMiddle" x1="0" y1="0" x2="1" y2=".15">
+            <stop offset="0" stop-color="#0b4937"/>
+            <stop offset=".48" stop-color="#1b7952"/>
+            <stop offset=".74" stop-color="#126345"/>
+            <stop offset="1" stop-color="#084034"/>
+          </linearGradient>
+          <linearGradient id="firUpper" x1="0" y1="0" x2="1" y2=".2">
+            <stop offset="0" stop-color="#10543c"/>
+            <stop offset=".5" stop-color="#27865a"/>
+            <stop offset="1" stop-color="#0c4836"/>
+          </linearGradient>
+          <linearGradient id="treeSnow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset="1" stop-color="#cde7ef"/>
+          </linearGradient>
+          <linearGradient id="treeGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fff1a8"/>
+            <stop offset=".42" stop-color="#ffc84e"/>
+            <stop offset="1" stop-color="#d88925"/>
+          </linearGradient>
+          <radialGradient id="treeRuby" cx=".32" cy=".24" r=".8">
+            <stop offset="0" stop-color="#ffabb0"/>
+            <stop offset=".42" stop-color="#e34e5b"/>
+            <stop offset="1" stop-color="#8f1e37"/>
+          </radialGradient>
+          <radialGradient id="treeBlue" cx=".32" cy=".24" r=".8">
+            <stop offset="0" stop-color="#c5f3ff"/>
+            <stop offset=".45" stop-color="#55b5cf"/>
+            <stop offset="1" stop-color="#247388"/>
+          </radialGradient>
+          <filter id="treeGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="7"/>
+          </filter>
+          <filter id="treeDrop" x="-30%" y="-20%" width="160%" height="155%">
+            <feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#173d4a" flood-opacity=".28"/>
+          </filter>
+          <g id="treeBauble">
+            <path d="M-3-7V-12Q0-16 3-12V-7" fill="none" stroke="#f8dfa0" stroke-width="2"/>
+            <circle r="9" fill="url(#treeRuby)" stroke="#ffe8b0" stroke-width="1.5"/>
+            <ellipse cx="-3" cy="-4" rx="2.4" ry="3.3" fill="#fff" opacity=".66"/>
+          </g>
+        </defs>
+        <ellipse cx="180" cy="456" rx="154" ry="13" fill="#426d7c" opacity=".2"/>
+        <ellipse cx="180" cy="450" rx="122" ry="8" fill="#fff" opacity=".72"/>
+        <g filter="url(#treeDrop)">
+          <path d="M145 419H215L227 460Q180 476 133 460Z" fill="#78503a"/>
+          <path d="M155 424H167V463H155ZM190 424H202V463H190Z" fill="#996746" opacity=".62"/>
+          <path d="M22 382Q70 344 101 286Q117 249 140 210Q157 179 180 120Q203 179 220 210Q243 249 259 286Q290 344 338 382Q283 399 229 372Q209 409 195 433H165Q151 409 131 372Q77 399 22 382Z" fill="url(#firLower)"/>
+          <path d="M47 309Q94 278 121 223Q141 197 154 164Q168 137 180 99Q192 137 206 164Q219 197 239 223Q266 278 313 309Q263 326 220 302Q201 330 189 352H171Q159 330 140 302Q97 326 47 309Z" fill="url(#firMiddle)"/>
+          <path d="M79 224Q115 199 139 157Q157 133 165 108Q173 86 180 63Q187 86 195 108Q203 133 221 157Q245 199 281 224Q240 239 209 220Q195 241 187 261H173Q165 241 151 220Q120 239 79 224Z" fill="url(#firUpper)"/>
+          <path d="M116 143Q141 124 155 94Q169 74 180 42Q191 74 205 94Q219 124 244 143Q213 156 190 139Q184 151 180 162Q176 151 170 139Q147 156 116 143Z" fill="#309064"/>
+          <g fill="none" stroke="#8ac69a" stroke-linecap="round" opacity=".38">
+            <path d="M180 144Q154 182 117 202M180 166Q208 194 242 207M180 226Q138 272 83 293M180 240Q225 274 283 290M180 318Q121 366 54 375M180 329Q240 366 306 375" stroke-width="2"/>
+            <path d="M147 190L126 184M139 204L111 202M214 197L239 188M221 210L253 205M117 281L99 268M106 296L78 291M243 283L265 270M255 297L286 291M101 366L78 357M86 378L54 377M259 365L284 355M276 379L309 376" stroke-width="1.6"/>
+          </g>
+          <g fill="none" stroke="url(#treeSnow)" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M112 144Q141 149 160 132Q173 121 180 103Q190 124 205 136Q224 150 248 143" stroke-width="8"/>
+            <path d="M75 224Q111 237 143 219Q165 205 180 174Q196 207 219 222Q249 239 285 222" stroke-width="9"/>
+            <path d="M42 310Q91 330 132 306Q160 289 180 249Q203 291 229 310Q270 332 318 307" stroke-width="10"/>
+            <path d="M15 382Q72 404 130 378Q158 365 180 327Q204 367 231 381Q288 407 345 379" stroke-width="11"/>
+          </g>
+          <g fill="none" stroke="#fff" stroke-linecap="round" opacity=".52">
+            <path d="M113 140Q139 148 157 133M79 220Q109 234 138 220M47 306Q88 326 126 307M29 379Q75 397 119 380" stroke-width="2"/>
+          </g>
+          <g fill="none" stroke="#f6d879" stroke-width="2" opacity=".9">
+            <path d="M128 169Q170 194 216 168"/>
+            <path d="M91 251Q171 293 270 250"/>
+            <path d="M48 337Q174 393 314 336"/>
+          </g>
+          <g class="tree-lights">
+            <circle cx="128" cy="178" r="13" fill="#ffe185" opacity=".52" filter="url(#treeGlow)"/>
+            <circle cx="128" cy="178" r="4.5" fill="#fff2a1"/>
+            <circle cx="157" cy="188" r="4" fill="#ff7980"/>
+            <circle cx="190" cy="190" r="4.5" fill="#b9f4d0"/>
+            <circle cx="216" cy="177" r="4" fill="#a5eaff"/>
+            <circle cx="101" cy="259" r="14" fill="#ffe185" opacity=".5" filter="url(#treeGlow)"/>
+            <circle cx="101" cy="259" r="4.5" fill="#fff2a1"/>
+            <circle cx="135" cy="273" r="4" fill="#ff7980"/>
+            <circle cx="173" cy="283" r="4.5" fill="#a5eaff"/>
+            <circle cx="212" cy="279" r="4" fill="#b9f4d0"/>
+            <circle cx="256" cy="257" r="14" fill="#ffe185" opacity=".5" filter="url(#treeGlow)"/>
+            <circle cx="256" cy="257" r="4.5" fill="#fff2a1"/>
+            <circle cx="65" cy="343" r="14" fill="#ffe185" opacity=".48" filter="url(#treeGlow)"/>
+            <circle cx="65" cy="343" r="4.5" fill="#fff2a1"/>
+            <circle cx="108" cy="359" r="4" fill="#a5eaff"/>
+            <circle cx="151" cy="370" r="4.5" fill="#ff7980"/>
+            <circle cx="199" cy="372" r="4" fill="#b9f4d0"/>
+            <circle cx="246" cy="359" r="4.5" fill="#fff2a1"/>
+            <circle cx="295" cy="342" r="14" fill="#ffe185" opacity=".48" filter="url(#treeGlow)"/>
+            <circle cx="295" cy="342" r="4.5" fill="#fff2a1"/>
+          </g>
+          <g class="tree-baubles">
+            <use href="#treeBauble" transform="translate(178 159) scale(.72)"/>
+            <use href="#treeBauble" transform="translate(115 231) scale(.82)"/>
+            <use href="#treeBauble" transform="translate(244 230) scale(.76)"/>
+            <use href="#treeBauble" transform="translate(180 247) scale(1.05)"/>
+            <use href="#treeBauble" transform="translate(74 318) scale(.82)"/>
+            <use href="#treeBauble" transform="translate(126 328) scale(.75)"/>
+            <use href="#treeBauble" transform="translate(220 326) scale(.88)"/>
+            <use href="#treeBauble" transform="translate(280 317) scale(.78)"/>
+            <use href="#treeBauble" transform="translate(169 347) scale(.7)"/>
+          </g>
+        </g>
+        <g class="tree-topper">
+          <circle cx="180" cy="42" r="35" fill="#ffd966" opacity=".45" filter="url(#treeGlow)"/>
+          <path d="M180 5L189 30L215 31L195 47L202 72L180 57L158 72L165 47L145 31L171 30Z" fill="url(#treeGold)" stroke="#fff4c2" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M180 15L186 33L204 34L190 45L195 62L180 52L165 62L170 45L156 34L174 33Z" fill="none" stroke="#fff7d4" stroke-width="1.4" opacity=".86"/>
+          <circle cx="180" cy="40" r="5" fill="#fff8d5"/>
+        </g>
+        <g fill="#fff" opacity=".95">
+          <circle cx="102" cy="192" r="2.5"/><circle cx="237" cy="192" r="2"/>
+          <circle cx="68" cy="282" r="2.2"/><circle cx="292" cy="278" r="2.5"/>
+          <circle cx="40" cy="356" r="2.4"/><circle cx="320" cy="357" r="2.1"/>
+          <circle cx="143" cy="296" r="1.8"/><circle cx="230" cy="301" r="2"/>
+        </g>
+      </svg>
+    </div>
+    <div class="christmas-snowman" role="img" aria-label="ตุ๊กตาหิมะใส่หมวกทรงสูง ผ้าพันคอถัก และประดับใบฮอลลี่">
+      <svg viewBox="0 0 140 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="snowBody" cx=".28" cy=".2" r=".82">
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset=".62" stop-color="#f8fdff"/>
+            <stop offset="1" stop-color="#c5dfe9"/>
+          </radialGradient>
+          <linearGradient id="snowHat" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#8f2638"/>
+            <stop offset=".48" stop-color="#d94b55"/>
+            <stop offset="1" stop-color="#a42c3e"/>
+          </linearGradient>
+          <linearGradient id="snowScarf" x1="0" y1="0" x2="1" y2=".7">
+            <stop offset="0" stop-color="#ef5960"/>
+            <stop offset=".5" stop-color="#c83148"/>
+            <stop offset="1" stop-color="#98263d"/>
+          </linearGradient>
+          <linearGradient id="snowCarrot" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffd178"/>
+            <stop offset=".48" stop-color="#f29a3d"/>
+            <stop offset="1" stop-color="#d66b2b"/>
+          </linearGradient>
+          <filter id="snowmanSoftShadow" x="-35%" y="-25%" width="170%" height="160%">
+            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#547d8b" flood-opacity=".2"/>
+          </filter>
+          <filter id="snowmanSparkle" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="3"/>
+          </filter>
+        </defs>
+        <ellipse cx="70" cy="200" rx="57" ry="8" fill="#7898a4" opacity=".22"/>
+        <ellipse cx="70" cy="198" rx="43" ry="4" fill="#f9feff" opacity=".7"/>
+        <g fill="none" stroke="#795439" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M34 145L16 129L7 114M18 130L8 132M15 128L16 117"/>
+          <path d="M106 145L124 129L133 114M122 130L132 132M125 128L124 117"/>
+        </g>
+        <g fill="none" stroke="#a57a52" stroke-width="1.5" stroke-linecap="round">
+          <path d="M16 127L7 114M18 130L8 132M122 130L132 132"/>
+        </g>
+        <g filter="url(#snowmanSoftShadow)">
+          <path d="M20 195C20 162 39 139 70 139S120 162 120 195Q70 207 20 195Z" fill="url(#snowBody)" stroke="#c5dfe9" stroke-width="2.5"/>
+          <ellipse cx="70" cy="105" rx="43" ry="40" fill="url(#snowBody)" stroke="#c5dfe9" stroke-width="2.5"/>
+          <ellipse cx="70" cy="49" rx="32" ry="29" fill="url(#snowBody)" stroke="#c5dfe9" stroke-width="2.5"/>
+        </g>
+        <path d="M39 41H101Q106 41 106 45Q106 50 101 50H39Q34 50 34 45Q34 41 39 41Z" fill="#f8fdff" stroke="#d6e8ed" stroke-width="1.5"/>
+        <path d="M45 18Q70 8 95 18L94 43H46Z" fill="url(#snowHat)" stroke="#84283b" stroke-width="2"/>
+        <path d="M44 35Q70 31 96 35V43Q70 49 44 43Z" fill="#f4f8f6" stroke="#d5e0dc" stroke-width="2"/>
+        <path d="M50 19Q70 13 90 19" fill="none" stroke="#f5948f" stroke-width="2" opacity=".64"/>
+        <path d="M52 38V44M61 37V45M70 37V45M79 37V45M88 38V44" stroke="#dfeae6" stroke-width="1.3"/>
+        <g class="snowman-holly">
+          <path d="M83 31Q77 20 84 17Q91 18 89 26Q96 17 101 23Q101 30 91 33Z" fill="#34784f" stroke="#245e42" stroke-width="1.2"/>
+          <path d="M86 29L84 21M91 29L98 24" fill="none" stroke="#9bc38b" stroke-width="1"/>
+          <circle cx="91" cy="31" r="4.3" fill="#c73548" stroke="#ffe0a2" stroke-width="1"/>
+          <circle cx="98" cy="32" r="3.3" fill="#e44b54" stroke="#ffe0a2" stroke-width=".8"/>
+          <circle cx="95" cy="26" r="3.2" fill="#af263d" stroke="#ffe0a2" stroke-width=".8"/>
+        </g>
+        <path d="M59 49Q63 46 66 49M77 49Q80 46 83 49" fill="none" stroke="#334552" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="62" cy="47" r="1" fill="#fff"/>
+        <circle cx="80" cy="47" r="1" fill="#fff"/>
+        <path d="M69 54Q72 55 91 60Q74 64 68 60Z" fill="url(#snowCarrot)" stroke="#c96e34" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M75 57L85 59" fill="none" stroke="#ffd889" stroke-width="1"/>
+        <path d="M68 66Q71 69 75 66Q79 70 83 66" fill="none" stroke="#718792" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse cx="45" cy="64" rx="8" ry="4.5" fill="#ed9b9e" opacity=".35"/>
+        <ellipse cx="95" cy="64" rx="8" ry="4.5" fill="#ed9b9e" opacity=".35"/>
+        <path d="M35 84Q70 97 105 84L109 96Q106 105 95 108L89 99Q70 106 50 99L44 107Q33 102 32 94Z" fill="url(#snowScarf)" stroke="#97283e" stroke-width="1.5"/>
+        <path d="M90 99Q102 97 108 91L102 132Q92 137 82 129Z" fill="url(#snowScarf)" stroke="#97283e" stroke-width="1.5"/>
+        <path d="M88 106L102 103M87 112L101 109M86 119L100 116M85 125L99 122" stroke="#f28a85" stroke-width="1.4" opacity=".8"/>
+        <path d="M34 92Q70 104 106 92" fill="none" stroke="#ffaaa0" stroke-width="1.5" opacity=".8"/>
+        <g fill="#f3c765" stroke="#fff1bc" stroke-width="1">
+          <circle cx="70" cy="129" r="4.5"/><circle cx="70" cy="153" r="4.5"/><circle cx="70" cy="177" r="4.5"/>
+        </g>
+        <g fill="#a97838">
+          <circle cx="70" cy="129" r="1.5"/><circle cx="70" cy="153" r="1.5"/><circle cx="70" cy="177" r="1.5"/>
+        </g>
+        <path d="M26 184Q43 190 58 186M82 188Q100 190 113 183" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+        <g fill="#fff">
+          <circle cx="47" cy="90" r="2"/><circle cx="105" cy="72" r="2.4"/>
+          <circle cx="34" cy="161" r="2.5"/><circle cx="103" cy="151" r="2"/>
+        </g>
+        <path d="M111 77L113 82L118 84L113 86L111 91L109 86L104 84L109 82Z" fill="#fff2b0" filter="url(#snowmanSparkle)"/>
+        <path d="M111 77L113 82L118 84L113 86L111 91L109 86L104 84L109 82Z" fill="#fff8d8"/>
+      </svg>
+    </div>
     <div class="garden-bear" role="img" aria-label="ตุ๊กตาหมีสีฟ้าขยับทักทายอยู่ข้างคิดตี้">
       <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
@@ -216,7 +506,7 @@
     </div>
     <p class="hk-thought-date">ม่ายบอกปล่อยให้งง แหะะ</p>
   </section>
-  <div class="petal-layer" id="petalLayer"></div>
+  <div class="petal-layer snow-layer" id="petalLayer" aria-hidden="true"></div>
 
 
   <main class="scene">
@@ -238,8 +528,10 @@
       <p class="tiny">A little thing for you</p>
       <h1>ให้คนเดียว 💗</h1>
 
-      <button class="bouquet-art" id="bouquetButton" type="button" aria-label="กดเพื่อดูช่อดอกไม้เต็ม ๆ">
-        <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <div class="bouquet-switcher" aria-label="เลือกดูช่อดอกไม้">
+        <button class="bouquet-art" id="bouquetButton" type="button" aria-label="เปิดคอลเล็กชันช่อดอกไม้">
+          <span class="bouquet-artwork-stage" id="bouquetArtworkStage" aria-hidden="true"></span>
+        <svg class="bouquet-rose-art" viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id="wrapGradient" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0" stop-color="#fff3f5"/>
@@ -252,6 +544,33 @@
             <filter id="bouquetShadow" x="-30%" y="-30%" width="160%" height="170%">
               <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#a95c77" flood-opacity=".18"/>
             </filter>
+            <radialGradient id="roseOuter" cx="38%" cy="30%" r="74%">
+              <stop offset="0" stop-color="#ffdce2"/>
+              <stop offset=".58" stop-color="#ef91a7"/>
+              <stop offset="1" stop-color="#b93e62"/>
+            </radialGradient>
+            <radialGradient id="roseInner" cx="36%" cy="28%" r="76%">
+              <stop offset="0" stop-color="#ffeced"/>
+              <stop offset=".62" stop-color="#e66f8d"/>
+              <stop offset="1" stop-color="#a92f54"/>
+            </radialGradient>
+            <g id="roseBloom">
+              <g fill="url(#roseOuter)" stroke="#bd4c68" stroke-width=".8" stroke-linejoin="round">
+                <path d="M0 5C-16 0-22-12-17-21C-13-29-3-28 1-19C10-30 21-24 19-14C18-4 9 8 0 13Z"/>
+                <path d="M0 5C-16 0-22-12-17-21C-13-29-3-28 1-19C10-30 21-24 19-14C18-4 9 8 0 13Z" transform="rotate(72)"/>
+                <path d="M0 5C-16 0-22-12-17-21C-13-29-3-28 1-19C10-30 21-24 19-14C18-4 9 8 0 13Z" transform="rotate(144)"/>
+                <path d="M0 5C-16 0-22-12-17-21C-13-29-3-28 1-19C10-30 21-24 19-14C18-4 9 8 0 13Z" transform="rotate(216)"/>
+                <path d="M0 5C-16 0-22-12-17-21C-13-29-3-28 1-19C10-30 21-24 19-14C18-4 9 8 0 13Z" transform="rotate(288)"/>
+              </g>
+              <g fill="url(#roseInner)" stroke="#b74061" stroke-width=".7" stroke-linejoin="round">
+                <path d="M0 3C-11-2-14-10-9-16C-5-21 1-18 2-12C8-20 16-14 12-7C10-2 5 4 0 7Z"/>
+                <path d="M0 3C-11-2-14-10-9-16C-5-21 1-18 2-12C8-20 16-14 12-7C10-2 5 4 0 7Z" transform="rotate(90)"/>
+                <path d="M0 3C-11-2-14-10-9-16C-5-21 1-18 2-12C8-20 16-14 12-7C10-2 5 4 0 7Z" transform="rotate(180)"/>
+                <path d="M0 3C-11-2-14-10-9-16C-5-21 1-18 2-12C8-20 16-14 12-7C10-2 5 4 0 7Z" transform="rotate(270)"/>
+              </g>
+              <path d="M-2 2C-6-3-3-9 2-10C6-11 9-7 6-4C5-2 2-2 1-4" fill="none" stroke="#8e2948" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M-11-13Q-7-22-1-21" fill="none" stroke="#ffe8e9" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+            </g>
           </defs>
           <g class="bouquet-sprigs" fill="none" stroke="#719a72" stroke-linecap="round">
             <path d="M130 155C119 111 75 84 54 36M132 153C135 108 178 79 199 31M130 156C126 111 117 67 125 24M127 154C103 119 83 105 35 91M135 154C158 119 179 110 226 91" stroke-width="3"/>
@@ -312,6 +631,11 @@
               </g>
               <circle r="4" fill="#e4b25f"/>
             </g>
+          </g>
+          <g class="rose-realistic-blooms" filter="url(#bouquetShadow)">
+            <use href="#roseBloom" transform="translate(55 36) scale(.83)"/>
+            <use href="#roseBloom" transform="translate(125 24) scale(.91)"/>
+            <use href="#roseBloom" transform="translate(199 31) scale(.83)"/>
           </g>
           <g class="bouquet-paper" filter="url(#bouquetShadow)">
             <path d="M78 104Q130 126 182 104L157 181Q130 191 103 181Z" fill="url(#wrapGradient)" stroke="#d99caf" stroke-width="1.5"/>
@@ -542,7 +866,11 @@
             <path d="M151 261L134 281L150 276L164 283Z" fill="#e8dcc0" stroke="#cdbb96" stroke-width="1"/>
           </g>
         </svg>
-      </button>
+        </button>
+        <button class="bouquet-switch-button bouquet-switch-previous" id="previousBouquet" type="button" aria-label="ดูช่อก่อนหน้า">‹</button>
+        <button class="bouquet-switch-button bouquet-switch-next" id="nextBouquet" type="button" aria-label="ดูช่อถัดไป">›</button>
+        <p class="bouquet-switch-status" id="bouquetSwitchStatus" aria-live="polite"></p>
+      </div>
 
       <button class="envelope-wrap" id="envelope" type="button" aria-label="เปิดจดหมาย">
         <div class="glow"></div>
@@ -649,12 +977,20 @@
           <span>เค้าทำแชทไว้แอบส่งหา</span>
           <span class="chat-status" id="chatStatus" role="status" aria-live="polite">กำลังเตรียมแชต...</span>
         </div>
+        <button class="chat-load-older" id="loadOlderChat" type="button" hidden>โหลดข้อความเก่า</button>
         <ol class="chat-messages" id="chatMessages" aria-label="ข้อความในแชต" aria-live="polite"></ol>
       </div>
       <form class="chat-form" id="chatForm">
+        <div class="chat-image-preview" id="chatImagePreview" hidden>
+          <img id="chatImagePreviewImage" alt="ตัวอย่างรูปที่จะส่ง">
+          <span id="chatImagePreviewName"></span>
+          <button class="chat-image-remove" id="removeChatImage" type="button" aria-label="นำรูปออก">×</button>
+        </div>
         <div class="chat-composer">
+          <input class="visually-hidden chat-image-input" id="chatImageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+          <label class="chat-attach" for="chatImageInput" aria-label="เลือกรูปภาพ" title="เลือกรูปภาพ">＋</label>
           <label class="visually-hidden" for="chatMessage">ข้อความ</label>
-          <textarea id="chatMessage" name="content" maxlength="500" rows="1" placeholder="ส่งข้อความ..." required></textarea>
+          <textarea id="chatMessage" name="content" maxlength="500" rows="1" placeholder="ส่งข้อความ..."></textarea>
           <button class="chat-send" id="sendChat" type="submit" aria-label="ส่งข้อความ">➤</button>
         </div>
       </form>
@@ -663,9 +999,143 @@
 
   <section class="bouquet-modal" id="bouquetModal" role="dialog" aria-modal="true" aria-labelledby="bouquetModalTitle" aria-hidden="true" hidden>
     <button class="bouquet-modal-close" id="closeBouquetModal" type="button" aria-label="ปิดช่อดอกไม้">×</button>
-    <h2 id="bouquetModalTitle">ช่อดอกทานตะวันน 🌻</h2>
-    <div class="bouquet-modal-artwork" id="bouquetModalArtwork"></div>
-    <p>ทำยากมากเลยยแหะะ 💛</p>
+    <header class="bouquet-collection-heading">
+      <p>FLOWERS FOR YOU</p>
+      <h2 id="bouquetModalTitle">คอลเล็กชันช่อดอกไม้ 💐</h2>
+      <span>เลือกช่อที่ชอบ แล้วเลื่อนดูได้เลยนะ</span>
+    </header>
+    <div class="bouquet-collection" id="bouquetCollection" aria-label="คอลเล็กชันช่อดอกไม้">
+      <button class="bouquet-collection-card" type="button" data-bouquet-source="rose" data-bouquet-title="ช่อกุหลาบสีชมพู" data-bouquet-note="กุหลาบสีชมพูแทนความรักและความอ่อนโยน 💗">
+        <span class="bouquet-collection-art" id="roseBouquetPreview" aria-hidden="true"></span>
+        <span class="bouquet-collection-name">ช่อกุหลาบสีชมพู</span>
+        <span class="bouquet-collection-caption">หวานละมุน · 🌹</span>
+      </button>
+      <button class="bouquet-collection-card" type="button" data-bouquet-source="sunflower" data-bouquet-title="ช่อทานตะวัน" data-bouquet-note="ขอให้เป็นวันที่สดใสเหมือนดอกทานตะวันนะ 💛">
+        <span class="bouquet-collection-art" id="sunflowerBouquetPreview" aria-hidden="true"></span>
+        <span class="bouquet-collection-name">ช่อทานตะวัน</span>
+        <span class="bouquet-collection-caption">สดใสทุกวัน · 🌻</span>
+      </button>
+      <button class="bouquet-collection-card" type="button" data-bouquet-source="tulip" data-bouquet-title="ช่อทิวลิปหลากสี" data-bouquet-note="ทิวลิปหลากสีสำหรับวันที่อยากเติมรอยยิ้ม 🌷">
+        <span class="bouquet-collection-art" aria-hidden="true">
+          <svg viewBox="0 0 220 230" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="tulipPink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe2e5"/><stop offset=".48" stop-color="#ed829b"/><stop offset="1" stop-color="#bd486a"/></linearGradient>
+              <linearGradient id="tulipCoral" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe7bd"/><stop offset=".45" stop-color="#f8a35d"/><stop offset="1" stop-color="#d65e4d"/></linearGradient>
+              <linearGradient id="tulipCream" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff5bd"/><stop offset=".5" stop-color="#f3d567"/><stop offset="1" stop-color="#d9a83b"/></linearGradient>
+              <linearGradient id="tulipLeaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9c77e"/><stop offset=".55" stop-color="#5c8c57"/><stop offset="1" stop-color="#376448"/></linearGradient>
+              <linearGradient id="tulipWrap" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff8f1"/><stop offset=".55" stop-color="#edd8cf"/><stop offset="1" stop-color="#cbaaa5"/></linearGradient>
+              <filter id="tulipShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#73514a" flood-opacity=".2"/></filter>
+              <g id="tulipFlower">
+                <path d="M-22 1C-26-10-21-24-15-27C-9-30-4-20 0-13C3-22 8-30 14-27C22-24 25-10 21 1C17 10 7 16 0 19C-8 15-18 9-22 1Z" fill="currentColor" stroke="#a7545c" stroke-opacity=".5" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M-14-25Q-12-11-8 5M0-15Q2-2 1 13M14-25Q12-10 7 5" fill="none" stroke="#fff4e7" stroke-opacity=".72" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M-19 1Q-8 9 0 10Q11 8 19 1" fill="none" stroke="#9e4c57" stroke-opacity=".3" stroke-width="1.4"/>
+              </g>
+            </defs>
+            <ellipse cx="110" cy="210" rx="56" ry="8" fill="#8b796c" opacity=".14"/>
+            <g fill="none" stroke="#527c50" stroke-width="3.2" stroke-linecap="round">
+              <path d="M103 173C89 137 52 102 43 63M105 174C95 130 83 81 82 40M109 175C108 132 111 82 119 55M113 175C126 131 150 88 159 50M116 174C132 144 172 114 181 87"/>
+            </g>
+            <g fill="url(#tulipLeaf)" stroke="#486d49" stroke-width="1.2">
+              <path d="M91 156C66 147 48 124 48 95C71 111 86 130 96 151Q97 155 91 156Z"/>
+              <path d="M98 169C77 165 62 151 57 132C77 140 92 152 103 166Z"/>
+              <path d="M111 160C93 135 92 103 100 80C112 104 118 132 115 158Z"/>
+              <path d="M119 168C135 146 157 137 177 138C161 154 143 164 121 172Z"/>
+              <path d="M128 156C137 128 157 106 178 98C169 123 151 145 132 160Z"/>
+            </g>
+            <g fill="none" stroke="#d0dfaa" stroke-width="1.2" opacity=".85">
+              <path d="M53 103Q72 125 91 149M63 139Q81 151 99 164M101 91Q108 124 112 153M170 104Q151 129 132 153M169 142Q149 153 126 165"/>
+            </g>
+            <g filter="url(#tulipShadow)">
+              <use href="#tulipFlower" transform="translate(43 58) scale(.72)" style="color:#f18a9e"/>
+              <use href="#tulipFlower" transform="translate(82 37) scale(.82)" style="color:#f4ad62"/>
+              <use href="#tulipFlower" transform="translate(119 51) scale(.74)" style="color:#ed788f"/>
+              <use href="#tulipFlower" transform="translate(159 46) scale(.84)" style="color:#f0d26c"/>
+              <use href="#tulipFlower" transform="translate(181 83) scale(.7)" style="color:#e97583"/>
+            </g>
+            <path d="M45 126Q109 151 175 125L153 205Q110 221 66 205Z" fill="url(#tulipWrap)" stroke="#bd9b94" stroke-width="2.5"/>
+            <path d="M45 126Q108 158 175 125L169 145Q109 173 51 145Z" fill="#fff8f3" stroke="#d5b9b0" stroke-width="2"/>
+            <path d="M79 148Q110 164 143 148L132 204Q110 212 89 204Z" fill="#f8eee5" opacity=".7"/>
+            <path d="M111 160C100 144 86 155 99 168L111 180L124 167C137 153 122 143 111 160Z" fill="#c15f7a" stroke="#a34461" stroke-width="1.5"/>
+            <path d="M100 165L85 183L108 176M121 165L137 183L114 176" fill="#d9788c" stroke="#a34461" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M62 149L79 203M159 149L142 203" fill="none" stroke="#fffaf4" stroke-opacity=".8" stroke-width="2"/>
+            <circle cx="32" cy="82" r="2" fill="#f1d493"/><circle cx="188" cy="59" r="2" fill="#f1d493"/>
+          </svg>
+        </span>
+        <span class="bouquet-collection-name">ช่อทิวลิปหลากสี</span>
+        <span class="bouquet-collection-caption">สดใสน่ารัก · 🌷</span>
+      </button>
+      <button class="bouquet-collection-card" type="button" data-bouquet-source="daisy" data-bouquet-title="ช่อเดซี่แสนอบอุ่น" data-bouquet-note="เดซี่ดอกเล็ก ๆ แทนความสุขและความทรงจำดี ๆ 🌼">
+        <span class="bouquet-collection-art" aria-hidden="true">
+          <svg viewBox="0 0 220 230" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="daisyLeaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b8ce83"/><stop offset=".55" stop-color="#6c985e"/><stop offset="1" stop-color="#3e704c"/></linearGradient>
+              <linearGradient id="daisyWrap" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf2"/><stop offset=".58" stop-color="#e4e6d3"/><stop offset="1" stop-color="#bfc9aa"/></linearGradient>
+              <radialGradient id="daisyCenter" cx="38%" cy="32%"><stop stop-color="#ffe990"/><stop offset=".65" stop-color="#e9b33f"/><stop offset="1" stop-color="#bd7627"/></radialGradient>
+              <filter id="daisyShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#6f6850" flood-opacity=".2"/></filter>
+              <g id="daisyBloom">
+                <g fill="#fffdf6" stroke="#e8dfc9" stroke-width=".7">
+                  <ellipse cy="-17" rx="4.8" ry="15"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(22.5)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(45)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(67.5)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(90)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(112.5)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(135)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(157.5)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(180)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(202.5)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(225)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(247.5)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(270)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(292.5)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(315)"/>
+                  <ellipse cy="-17" rx="4.8" ry="15" transform="rotate(337.5)"/>
+                </g>
+                <circle r="10.5" fill="url(#daisyCenter)" stroke="#c68b34" stroke-width=".9"/>
+                <g fill="#fff1b1" opacity=".85"><circle cx="-4" cy="-3" r="1"/><circle cx="1" cy="-5" r=".9"/><circle cx="5" cy="-2" r="1"/><circle cx="-2" cy="2" r=".8"/><circle cx="3" cy="4" r="1"/><circle cx="-6" cy="4" r=".8"/></g>
+              </g>
+            </defs>
+            <ellipse cx="110" cy="210" rx="54" ry="8" fill="#7e8065" opacity=".14"/>
+            <g fill="none" stroke="#527c50" stroke-width="3" stroke-linecap="round">
+              <path d="M99 171C81 132 58 99 48 66M103 172C97 128 91 73 91 43M109 174C110 127 119 76 129 55M115 174C132 131 159 94 169 68M119 174C137 148 169 125 184 108"/>
+            </g>
+            <g fill="url(#daisyLeaf)" stroke="#52784e" stroke-width="1.1">
+              <path d="M91 154C70 148 54 131 49 108C69 119 84 135 96 151Z"/>
+              <path d="M101 164C82 161 68 149 62 132C79 140 94 150 104 163Z"/>
+              <path d="M108 153C94 130 91 103 97 81C108 103 114 128 112 151Z"/>
+              <path d="M118 165C134 145 154 136 173 138C157 153 139 163 120 169Z"/>
+              <path d="M128 153C140 127 159 109 180 102C170 124 151 145 131 157Z"/>
+              <path d="M99 170C83 171 70 164 66 153C81 155 94 161 102 169Z"/>
+            </g>
+            <g fill="none" stroke="#dce8b5" stroke-width="1.1" opacity=".9">
+              <path d="M54 114Q72 132 92 149M67 137Q83 149 100 160M98 91Q105 122 109 149M174 108Q154 132 131 153M169 143Q147 153 123 164"/>
+            </g>
+            <g filter="url(#daisyShadow)">
+              <use href="#daisyBloom" transform="translate(48 62) scale(.76)"/>
+              <use href="#daisyBloom" transform="translate(91 39) scale(.94)"/>
+              <use href="#daisyBloom" transform="translate(129 53) scale(.79)"/>
+              <use href="#daisyBloom" transform="translate(169 64) scale(.83)"/>
+              <use href="#daisyBloom" transform="translate(184 104) scale(.64)"/>
+            </g>
+            <path d="M46 126Q109 151 175 126L153 205Q110 221 66 205Z" fill="url(#daisyWrap)" stroke="#9caa85" stroke-width="2.5"/>
+            <path d="M46 126Q109 158 175 126L169 145Q109 173 51 145Z" fill="#fffdf3" stroke="#bdc7a8" stroke-width="2"/>
+            <path d="M80 148Q110 164 142 148L132 204Q110 212 89 204Z" fill="#eff0de" opacity=".75"/>
+            <path d="M111 160C100 144 86 155 99 168L111 180L124 167C137 153 122 143 111 160Z" fill="#c16b80" stroke="#9f5068" stroke-width="1.4"/>
+            <path d="M100 165L85 183L108 176M121 165L137 183L114 176" fill="#db91a0" stroke="#9f5068" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M62 149L79 203M159 149L142 203" fill="none" stroke="#fffef7" stroke-opacity=".8" stroke-width="2"/>
+            <circle cx="31" cy="82" r="2" fill="#f0cf75"/><circle cx="190" cy="83" r="2" fill="#f0cf75"/>
+          </svg>
+        </span>
+        <span class="bouquet-collection-name">ช่อเดซี่แสนอบอุ่น</span>
+        <span class="bouquet-collection-caption">เรียบง่ายสดใส · 🌼</span>
+      </button>
+    </div>
+    <div class="bouquet-detail" id="bouquetDetail" hidden>
+      <button class="bouquet-detail-back" id="backToBouquets" type="button">‹ กลับไปคอลเล็กชัน</button>
+      <h3 id="bouquetDetailTitle"></h3>
+      <div class="bouquet-modal-artwork" id="bouquetModalArtwork"></div>
+      <p id="bouquetDetailNote"></p>
+    </div>
   </section>
 
   <button class="game-launch" id="openFlowerGame" type="button">เล่นมินิเกม 🎮</button>
@@ -706,7 +1176,7 @@
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <script src="script.js?v=blue-bear-1"></script>
+  <script src="script.js?v=bouquet-switcher-1"></script>
 
 <!-- NEW FLORAL BORDER -->
 
