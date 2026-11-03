@@ -6,9 +6,20 @@ const declineDelivery = document.getElementById("declineDelivery");
 const deliveryResponse = document.getElementById("deliveryResponse");
 const bouquetButton = document.getElementById("bouquetButton");
 const bouquetSvg = bouquetButton.querySelector(".sunflower-bouquet");
+const roseBouquetSvg = bouquetButton.querySelector(".bouquet-rose-art");
+const bouquetArtworkStage = document.getElementById("bouquetArtworkStage");
+const previousBouquet = document.getElementById("previousBouquet");
+const nextBouquet = document.getElementById("nextBouquet");
+const bouquetSwitchStatus = document.getElementById("bouquetSwitchStatus");
 const bouquetModal = document.getElementById("bouquetModal");
 const bouquetModalArtwork = document.getElementById("bouquetModalArtwork");
 const closeBouquetModal = document.getElementById("closeBouquetModal");
+const bouquetCollection = document.getElementById("bouquetCollection");
+const bouquetDetail = document.getElementById("bouquetDetail");
+const bouquetDetailTitle = document.getElementById("bouquetDetailTitle");
+const bouquetDetailNote = document.getElementById("bouquetDetailNote");
+const backToBouquets = document.getElementById("backToBouquets");
+const bouquetCards = [...document.querySelectorAll(".bouquet-collection-card")];
 const letter = document.getElementById("letter");
 const closeLetter = document.getElementById("closeLetter");
 const letterCard = document.getElementById("letterCard");
@@ -43,9 +54,15 @@ const chatDialog = document.getElementById("chatDialog");
 const closeChat = document.getElementById("closeChat");
 const chatStatus = document.getElementById("chatStatus");
 const chatMessages = document.getElementById("chatMessages");
+const loadOlderChat = document.getElementById("loadOlderChat");
 const chatForm = document.getElementById("chatForm");
 const chatMessage = document.getElementById("chatMessage");
 const sendChat = document.getElementById("sendChat");
+const chatImageInput = document.getElementById("chatImageInput");
+const chatImagePreview = document.getElementById("chatImagePreview");
+const chatImagePreviewImage = document.getElementById("chatImagePreviewImage");
+const chatImagePreviewName = document.getElementById("chatImagePreviewName");
+const removeChatImage = document.getElementById("removeChatImage");
 
 const supabaseConfig = {
   url: "https://agidwyplqqqqqcgxrcul.supabase.co",
@@ -72,6 +89,8 @@ updateRelationshipElapsed();
 setInterval(updateRelationshipElapsed, 1000);
 
 const flowers = ["🌸", "🌷", "🌼", "💗", "💕", "❤️"];
+const snowflakes = ["❄", "❅", "❆"];
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const deliveryMessages = [
   "น้าา รับไว้หน่อยนะ เค้าตั้งใจทำให้เลย 🥺💗",
   "ไม่รับจริงเหรอ เค้าอุตส่าห์ห่อใจตัวเองมาส่งด้วยนะ 🎁💕",
@@ -105,57 +124,166 @@ declineDelivery.addEventListener("click", () => {
   deliveryResponse.hidden = false;
 });
 
-function openBouquetModal() {
+let bouquetArtworkCloneId = 0;
+
+function cloneBouquetArtwork(source) {
+  const artwork = source.cloneNode(true);
+  const elements = [artwork, ...artwork.querySelectorAll("*")];
+  const ids = new Map();
+  bouquetArtworkCloneId += 1;
+
+  for (const element of elements) {
+    if (element.id) {
+      const originalId = element.id;
+      const cloneId = `bouquet-${bouquetArtworkCloneId}-${originalId}`;
+      ids.set(originalId, cloneId);
+      element.id = cloneId;
+    }
+  }
+
+  for (const element of elements) {
+    for (const attribute of [...element.attributes]) {
+      let value = attribute.value.replace(/url\(#([^)]+)\)/g, (reference, id) => (
+        ids.has(id) ? `url(#${ids.get(id)})` : reference
+      ));
+
+      if ((attribute.name === "href" || attribute.name === "xlink:href") && value.startsWith("#")) {
+        const id = value.slice(1);
+        if (ids.has(id)) value = `#${ids.get(id)}`;
+      }
+
+      if (value !== attribute.value) element.setAttribute(attribute.name, value);
+    }
+  }
+
+  return artwork;
+}
+
+function getBouquetArtwork(card) {
+  if (card.dataset.bouquetSource === "rose") return roseBouquetSvg;
+  if (card.dataset.bouquetSource === "sunflower") return bouquetSvg;
+  return card.querySelector("svg");
+}
+
+let currentBouquetIndex = bouquetCards.findIndex((card) => card.dataset.bouquetSource === "sunflower");
+
+function showBouquet(index) {
+  currentBouquetIndex = (index + bouquetCards.length) % bouquetCards.length;
+  const card = bouquetCards[currentBouquetIndex];
+
+  bouquetArtworkStage.replaceChildren(cloneBouquetArtwork(getBouquetArtwork(card)));
+  bouquetButton.setAttribute("aria-label", `เปิดคอลเล็กชันช่อดอกไม้ — ${card.dataset.bouquetTitle}`);
+  bouquetSwitchStatus.textContent = `${card.dataset.bouquetTitle} · ${currentBouquetIndex + 1} / ${bouquetCards.length}`;
+}
+
+document.querySelectorAll(".bouquet-collection-card").forEach((card) => {
+  if (card.dataset.bouquetSource !== "rose" && card.dataset.bouquetSource !== "sunflower") return;
+
+  const preview = card.querySelector(".bouquet-collection-art");
+  preview.appendChild(cloneBouquetArtwork(getBouquetArtwork(card)));
+});
+
+showBouquet(currentBouquetIndex);
+
+previousBouquet.addEventListener("click", () => showBouquet(currentBouquetIndex - 1));
+nextBouquet.addEventListener("click", () => showBouquet(currentBouquetIndex + 1));
+
+function openBouquetCollection() {
   if (document.body.classList.contains("bouquet-revealing")) return;
 
-  bouquetModalArtwork.appendChild(bouquetSvg);
+  bouquetCollection.hidden = false;
+  bouquetDetail.hidden = true;
   bouquetModal.hidden = false;
   bouquetModal.setAttribute("aria-hidden", "false");
   closeBouquetModal.focus();
 }
 
 function closeBouquet() {
-  bouquetButton.appendChild(bouquetSvg);
+  bouquetCollection.hidden = false;
+  bouquetDetail.hidden = true;
   bouquetModal.hidden = true;
   bouquetModal.setAttribute("aria-hidden", "true");
   bouquetButton.focus();
 }
 
-bouquetButton.addEventListener("click", openBouquetModal);
+function openBouquetDetail(card) {
+  currentBouquetIndex = bouquetCards.indexOf(card);
+  showBouquet(currentBouquetIndex);
+  bouquetDetailTitle.textContent = card.dataset.bouquetTitle;
+  bouquetDetailNote.textContent = card.dataset.bouquetNote;
+  bouquetModalArtwork.replaceChildren(cloneBouquetArtwork(getBouquetArtwork(card)));
+  bouquetCollection.hidden = true;
+  bouquetDetail.hidden = false;
+  backToBouquets.focus();
+}
+
+bouquetButton.addEventListener("click", openBouquetCollection);
 closeBouquetModal.addEventListener("click", closeBouquet);
 bouquetModal.addEventListener("click", (event) => {
   if (event.target === bouquetModal) closeBouquet();
 });
+bouquetCollection.addEventListener("click", (event) => {
+  const card = event.target.closest(".bouquet-collection-card");
+  if (card) openBouquetDetail(card);
+});
+backToBouquets.addEventListener("click", () => {
+  bouquetDetail.hidden = true;
+  bouquetCollection.hidden = false;
+  bouquetCollection.querySelector(".bouquet-collection-card")?.focus();
+});
 
-// Falling flowers
-function createPetal() {
-  const petal = document.createElement("span");
-  petal.className = "petal";
-  petal.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+// Falling snow
+function createSnowflake() {
+  const snowflake = document.createElement("span");
+  snowflake.className = "snowflake";
+  snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
 
-  const size = 13 + Math.random() * 18;
-  const duration = 6 + Math.random() * 7;
+  const size = 15 + Math.random() * 18;
+  const duration = 7 + Math.random() * 6;
   const sway = -80 + Math.random() * 160;
 
-  petal.style.left = `${Math.random() * 100}%`;
-  petal.style.fontSize = `${size}px`;
-  petal.style.animationDuration = `${duration}s`;
-  petal.style.setProperty("--sway", `${sway}px`);
+  snowflake.style.top = prefersReducedMotion ? `${Math.random() * 95}vh` : "-50px";
+  snowflake.style.left = `${Math.random() * 100}%`;
+  snowflake.style.fontSize = `${size}px`;
+  snowflake.style.animationDuration = `${duration}s`;
+  snowflake.style.setProperty("--sway", `${sway}px`);
 
-  petalLayer.appendChild(petal);
+  petalLayer.appendChild(snowflake);
 
-  setTimeout(() => petal.remove(), duration * 1000 + 500);
+  if (!prefersReducedMotion) {
+    setTimeout(() => snowflake.remove(), duration * 1000 + 500);
+  }
 }
 
-setInterval(createPetal, 420);
+if (prefersReducedMotion) {
+  for (let i = 0; i < 28; i++) createSnowflake();
+} else {
+  setInterval(createSnowflake, 300);
 
-for (let i = 0; i < 12; i++) {
-  setTimeout(createPetal, i * 180);
+  for (let i = 0; i < 18; i++) {
+    setTimeout(createSnowflake, i * 140);
+  }
 }
 
 const supabaseUrl = supabaseConfig.url.replace(/\/+$/, "");
 const chatApiReady = Boolean(supabaseUrl && supabaseConfig.anonKey);
+const chatPageSize = 50;
 let chatRefreshTimer;
+let chatLoadedMessages = [];
+let chatMessagesInitialized = false;
+let chatHasOlderMessages = false;
+let chatOlderMessagesLoading = false;
+let pendingChatImage = null;
+let chatImagePreviewUrl = "";
+
+const chatImageTypes = new Map([
+  ["image/jpeg", "jpg"],
+  ["image/png", "png"],
+  ["image/webp", "webp"],
+  ["image/gif", "gif"],
+  ["image/avif", "avif"],
+]);
+const chatImageMaxBytes = 5 * 1024 * 1024;
 
 function setChatStatus(message, isError = false) {
   chatStatus.textContent = message;
@@ -172,7 +300,55 @@ function formatChatTimestamp(value) {
   });
 }
 
-function renderChatMessages(messages) {
+function getChatImageUrl(value) {
+  const url = value.replace(/[.,!?;:)\]]+$/, "");
+  try {
+    const parsedUrl = new URL(url);
+    if (parsedUrl.protocol !== "https:" && parsedUrl.protocol !== "http:") return null;
+    if (!/\.(?:avif|gif|jpe?g|png|webp)$/i.test(parsedUrl.pathname)) return null;
+    return { href: parsedUrl.href, trailingText: value.slice(url.length) };
+  } catch {
+    return null;
+  }
+}
+
+function appendChatMessageContent(container, value) {
+  const urlPattern = /https?:\/\/[^\s<>]+/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = urlPattern.exec(value))) {
+    const image = getChatImageUrl(match[0]);
+    if (!image) continue;
+
+    container.append(document.createTextNode(value.slice(lastIndex, match.index)));
+
+    const link = document.createElement("a");
+    link.className = "chat-image-link";
+    link.href = image.href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.setAttribute("aria-label", "เปิดรูปภาพขนาดเต็ม");
+
+    const imageElement = document.createElement("img");
+    imageElement.className = "chat-message-image";
+    imageElement.src = image.href;
+    imageElement.alt = "รูปภาพในข้อความ";
+    imageElement.loading = "lazy";
+    imageElement.decoding = "async";
+    imageElement.referrerPolicy = "no-referrer";
+    link.append(imageElement);
+    container.append(link, document.createTextNode(image.trailingText));
+    lastIndex = match.index + match[0].length;
+  }
+
+  container.append(document.createTextNode(value.slice(lastIndex)));
+}
+
+function renderChatMessages(messages, { preservePosition = false, scrollToBottom = false } = {}) {
+  const previousScrollHeight = chatMessages.scrollHeight;
+  const previousScrollTop = chatMessages.scrollTop;
+  const wasAtBottom = previousScrollHeight - previousScrollTop - chatMessages.clientHeight < 80;
   const items = messages.map((message) => {
     const item = document.createElement("li");
     const isOwner = message.sender_type === "owner";
@@ -185,8 +361,9 @@ function renderChatMessages(messages) {
     timestamp.dateTime = message.created_at;
     timestamp.textContent = formatChatTimestamp(message.created_at);
 
-    const content = document.createElement("p");
-    content.textContent = message.content;
+    const content = document.createElement("div");
+    content.className = "chat-message-content";
+    appendChatMessageContent(content, message.content);
 
     if (isOwner) {
       const name = document.createElement("strong");
@@ -199,7 +376,53 @@ function renderChatMessages(messages) {
   });
 
   chatMessages.replaceChildren(...items);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  if (preservePosition) {
+    chatMessages.scrollTop = previousScrollTop + chatMessages.scrollHeight - previousScrollHeight;
+  } else if (scrollToBottom || wasAtBottom) {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+}
+
+function mergeChatMessages(existing, incoming) {
+  const messagesById = new Map(existing.map((message) => [String(message.id), message]));
+  for (const message of incoming) messagesById.set(String(message.id), message);
+  return [...messagesById.values()].sort((first, second) => Number(first.id) - Number(second.id));
+}
+
+function removePendingChatImage() {
+  if (chatImagePreviewUrl) URL.revokeObjectURL(chatImagePreviewUrl);
+  pendingChatImage = null;
+  chatImagePreviewUrl = "";
+  chatImageInput.value = "";
+  chatImagePreview.hidden = true;
+  chatImagePreviewImage.removeAttribute("src");
+  chatImagePreviewName.textContent = "";
+}
+
+function createChatUploadId() {
+  return [...crypto.getRandomValues(new Uint8Array(16))]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function uploadChatImage(file, fileName) {
+  const response = await fetch(`${supabaseUrl}/storage/v1/object/chat-images/${fileName}`, {
+    method: "POST",
+    headers: {
+      apikey: supabaseConfig.anonKey,
+      Authorization: `Bearer ${supabaseConfig.anonKey}`,
+      "Content-Type": file.type,
+      "x-upsert": "false",
+    },
+    body: file,
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+    throw new Error(details || `อัปโหลดรูปไม่สำเร็จ (${response.status})`);
+  }
+
+  return `${supabaseUrl}/storage/v1/object/public/chat-images/${fileName}`;
 }
 
 async function requestChat(path, options = {}) {
@@ -227,17 +450,51 @@ async function requestChat(path, options = {}) {
   }
 }
 
-async function loadChatMessages() {
+async function loadChatMessages({ scrollToBottom = !chatMessagesInitialized } = {}) {
   try {
-    const messages = await requestChat(
-      "chat_messages?select=id,display_name,sender_type,content,created_at&order=created_at.asc&limit=100",
+    const newestMessages = await requestChat(
+      `chat_messages?select=id,display_name,sender_type,content,created_at&order=id.desc&limit=${chatPageSize}`,
     );
-    renderChatMessages(messages);
-    setChatStatus(messages.length ? "ข้อความล่าสุด 💗" : "ยังไม่มีข้อความ มาเริ่มคุยกันได้นะ");
+    if (!chatMessagesInitialized) {
+      chatHasOlderMessages = newestMessages.length === chatPageSize;
+    }
+    chatLoadedMessages = mergeChatMessages(chatLoadedMessages, newestMessages);
+    loadOlderChat.hidden = !chatHasOlderMessages;
+    renderChatMessages(chatLoadedMessages, { scrollToBottom });
+    chatMessagesInitialized = true;
+    setChatStatus(chatLoadedMessages.length ? "ข้อความล่าสุด 💗" : "ยังไม่มีข้อความ มาเริ่มคุยกันได้นะ");
   } catch (error) {
     setChatStatus(`โหลดข้อความไม่สำเร็จ: ${error.message}`, true);
   }
 }
+
+async function loadOlderChatMessages() {
+  if (chatOlderMessagesLoading || !chatHasOlderMessages || !chatLoadedMessages.length) return;
+
+  chatOlderMessagesLoading = true;
+  loadOlderChat.disabled = true;
+  loadOlderChat.textContent = "กำลังโหลด...";
+
+  try {
+    const oldestId = chatLoadedMessages[0].id;
+    const olderMessages = await requestChat(
+      `chat_messages?select=id,display_name,sender_type,content,created_at&id=lt.${oldestId}&order=id.desc&limit=${chatPageSize}`,
+    );
+    chatHasOlderMessages = olderMessages.length === chatPageSize;
+    chatLoadedMessages = mergeChatMessages(chatLoadedMessages, olderMessages);
+    renderChatMessages(chatLoadedMessages, { preservePosition: true });
+    loadOlderChat.hidden = !chatHasOlderMessages;
+    setChatStatus(chatHasOlderMessages ? "เลื่อนดูข้อความเก่าต่อได้เลย 💗" : "โหลดข้อความเก่าครบแล้ว 💗");
+  } catch (error) {
+    setChatStatus(`โหลดข้อความเก่าไม่สำเร็จ: ${error.message}`, true);
+  } finally {
+    chatOlderMessagesLoading = false;
+    loadOlderChat.disabled = false;
+    loadOlderChat.textContent = "โหลดข้อความเก่า";
+  }
+}
+
+loadOlderChat.addEventListener("click", loadOlderChatMessages);
 
 function openChatDialog() {
   chatDialog.hidden = false;
@@ -278,17 +535,36 @@ chatForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!chatApiReady) return;
 
-  const content = chatMessage.value.trim();
-  if (!content) {
-    setChatStatus("พิมพ์ข้อความก่อนส่งนะ", true);
+  const messageText = chatMessage.value.trim();
+  if (!messageText && !pendingChatImage) {
+    setChatStatus("พิมพ์ข้อความหรือเลือกรูปก่อนส่งนะ", true);
     chatMessage.focus();
     return;
   }
 
   sendChat.disabled = true;
+  chatImageInput.disabled = true;
+  removeChatImage.disabled = true;
   setChatStatus("กำลังส่งข้อความ...");
 
   try {
+    let content = messageText;
+
+    if (pendingChatImage) {
+      const file = pendingChatImage;
+      const extension = chatImageTypes.get(file.type);
+      if (!extension) throw new Error("ชนิดไฟล์รูปนี้ไม่รองรับ");
+
+      const fileName = `${createChatUploadId()}.${extension}`;
+      const publicUrl = `${supabaseUrl}/storage/v1/object/public/chat-images/${fileName}`;
+      content = [messageText, publicUrl].filter(Boolean).join("\n");
+      if (content.length > 500) {
+        throw new Error("ข้อความพร้อมลิงก์รูปยาวเกินกำหนด กรุณาย่อข้อความ");
+      }
+
+      await uploadChatImage(file, fileName);
+    }
+
     await requestChat("chat_messages", {
       method: "POST",
       headers: {
@@ -302,14 +578,44 @@ chatForm.addEventListener("submit", async (event) => {
       }),
     });
     chatForm.reset();
-    await loadChatMessages();
+    removePendingChatImage();
+    await loadChatMessages({ scrollToBottom: true });
     setChatStatus("ส่งข้อความแล้ว 💗");
   } catch (error) {
     setChatStatus(`ส่งข้อความไม่สำเร็จ: ${error.message}`, true);
   } finally {
     sendChat.disabled = false;
+    chatImageInput.disabled = false;
+    removeChatImage.disabled = false;
   }
 });
+
+chatImageInput.addEventListener("change", () => {
+  const [file] = chatImageInput.files;
+  if (!file) return;
+
+  if (!chatImageTypes.has(file.type)) {
+    removePendingChatImage();
+    setChatStatus("รองรับไฟล์ JPG, PNG, WebP, GIF และ AVIF เท่านั้น", true);
+    return;
+  }
+
+  if (file.size > chatImageMaxBytes) {
+    removePendingChatImage();
+    setChatStatus("รูปต้องมีขนาดไม่เกิน 5 MB", true);
+    return;
+  }
+
+  if (chatImagePreviewUrl) URL.revokeObjectURL(chatImagePreviewUrl);
+  pendingChatImage = file;
+  chatImagePreviewUrl = URL.createObjectURL(file);
+  chatImagePreviewImage.src = chatImagePreviewUrl;
+  chatImagePreviewName.textContent = file.name;
+  chatImagePreview.hidden = false;
+  setChatStatus("เพิ่มรูปแล้ว พิมพ์ข้อความหรือกดส่งได้เลย");
+});
+
+removeChatImage.addEventListener("click", removePendingChatImage);
 
 // Letter
 function openLetter() {
